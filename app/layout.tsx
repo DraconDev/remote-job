@@ -16,10 +16,14 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <NavMenu />
-            <body className={`${inter.className} container fluid p-2 `}>
-                {" "}
+        <html
+            lang="en"
+            className="flex flex-col width-full min-h-screen"
+        >
+            <body
+                className={`${inter.className} container fluid p-2 width-full`}
+            >
+                <NavMenu />
                 {children}
             </body>
         </html>
