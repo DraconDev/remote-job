@@ -2,13 +2,13 @@ import { Button } from "@/components/ui/button";
 
 export default function Home() {
     return (
-        <main>
+        <main className="bg-red-700">
             hello
             <Button
                 variant="default"
                 size="default"
             >
-                hello
+                Elemental
             </Button>
         </main>
     );
