@@ -11,8 +11,6 @@ const NavMenu = (props: Props) => {
                 <NavLink href="/">RWN</NavLink>
                 <div className=" flex gap-3 items-center">
                     <NavLink href="/">
-                        {/* search icon */}
-
                         <FaSearch className="w-6 h-6" />
                     </NavLink>
                     <NavLink
