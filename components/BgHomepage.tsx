@@ -8,7 +8,7 @@ const BgHomepage = (props: Props) => {
             <Image
                 src="/static/bg.jpg"
                 alt=""
-                className="absolute inset-0 -z-10 h-[500px] w-full object-cover  "
+                className="-z-10 h-[500px] w-screen object-cover"
                 width="2000"
                 height="2000"
             />

@@ -1,3 +1,4 @@
+import BgHomepage from "@/components/BgHomepage";
 import NavMenu from "@/components/NavMenu";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -18,13 +19,14 @@ export default function RootLayout({
     return (
         <html
             lang="en"
-            className="flex flex-col width-full min-h-screen"
+            className="flex flex-col w-full min-h-screen bg "
         >
-            <body
-                className={`${inter.className} container fluid p-2 width-full`}
-            >
+            <body className={`${inter.className}   `}>
                 <NavMenu />
-                {children}
+                <BgHomepage />
+                <div className=" mx-auto w-full max-w-[1400px] ">
+                    {children}
+                </div>
             </body>
         </html>
     );
