@@ -3,7 +3,7 @@
 import Link from "next/link";
 import NavLink from "./NavLink";
 import PostJob from "./NavLink";
-
+import { FaSearch } from "react-icons/fa";
 type Props = {};
 
 const NavMenu = (props: Props) => {
@@ -16,6 +16,12 @@ const NavMenu = (props: Props) => {
                     add="bg-accent"
                 >
                     Post a job $299
+                </NavLink>
+
+                <NavLink href="/">
+                    {/* search icon */}
+
+                    <FaSearch />
                 </NavLink>
             </div>
         </div>
