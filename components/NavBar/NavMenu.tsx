@@ -11,18 +11,19 @@ const NavMenu = (props: Props) => {
         <div className="py-3 bg-primary z-50  flex justify-center">
             <div className="container justify-between flex px-3 ">
                 <NavLink href="/">RWN</NavLink>
-                <NavLink
-                    href="/"
-                    add="bg-accent"
-                >
-                    Post a job $299
-                </NavLink>
+                <div className=" flex gap-3 items-center">
+                    <NavLink href="/">
+                        {/* search icon */}
 
-                <NavLink href="/">
-                    {/* search icon */}
-
-                    <FaSearch />
-                </NavLink>
+                        <FaSearch className="w-6 h-6" />
+                    </NavLink>
+                    <NavLink
+                        href="/"
+                        add="bg-accent"
+                    >
+                        Post a job
+                    </NavLink>
+                </div>
             </div>
         </div>
     );

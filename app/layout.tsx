@@ -23,7 +23,7 @@ export default function RootLayout({
         >
             <body className={`${inter.className}   `}>
                 <NavMenu />
-                <BgHomepage />
+                {/* <BgHomepage /> */}
                 <div className=" mx-auto w-full max-w-[1400px] ">
                     {children}
                 </div>
