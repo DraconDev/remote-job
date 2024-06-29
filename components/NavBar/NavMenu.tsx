@@ -1,9 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import NavLink from "./NavLink";
-import PostJob from "./NavLink";
 import { FaSearch } from "react-icons/fa";
+import NavLink from "./NavLink";
 type Props = {};
 
 const NavMenu = (props: Props) => {
