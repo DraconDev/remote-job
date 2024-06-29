@@ -10,7 +10,7 @@ const NavMenu = (props: Props) => {
         <div className="p-3 bg-primary z-50  flex justify-center">
             <div className="container justify-between flex px-3 ">
                 <NavLink href="/">Home</NavLink>
-                <NavLink href="/">Login</NavLink/>
+                <NavLink href="/">Login</NavLink>
             </div>
         </div>
     );

@@ -1,4 +1,4 @@
-import { Link } from "lucide-react";
+import Link from "next/link";
 
 type Props = {
     href: string;
@@ -9,7 +9,7 @@ const NavLink = (props: Props) => {
     return (
         <Link
             href={props.href}
-            className="text-white"
+            className="text-white text-xl"
         >
             {props?.children}
         </Link>
