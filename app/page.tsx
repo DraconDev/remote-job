@@ -1,5 +1,6 @@
 "use client";
 
+import JobCards from "@/components/JobCards/JobCards";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
             >
                 Elemen
             </Button>
+            <JobCards />
         </main>
     );
 }
