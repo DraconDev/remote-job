@@ -4,13 +4,16 @@ type Props = {
     href: string;
     children?: React.ReactNode;
 };
-const NavLink = (props: Props) => {
+
+const PostJob = (props: Props) => {
     return (
         <Link
             href={props.href}
-            className="text-white text-xl px-2 p-1  font-bold rounded-md"
+            className="text-white text-xl px-2 p-1 bg-accent font-bold rounded-md"
         >
             {props?.children}
         </Link>
     );
 };
+
+export default PostJob;
