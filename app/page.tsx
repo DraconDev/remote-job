@@ -7,10 +7,7 @@ export default function Home() {
     return (
         <main className=" w-full p-2">
             hello
-            <Button
-                variant="default"
-                size="default"
-            >
+            <Button variant="default" size="default">
                 Elemen
             </Button>
             {/* <JobCard /> */}

@@ -14,7 +14,7 @@ const NavMenu = (props: Props) => {
                         <FaSearch className="w-6 h-6" />
                     </NavLink>
                     <NavLink
-                        href="/"
+                        href="/postjob"
                         add="bg-accent"
                     >
                         Post a job
