@@ -1,5 +1,6 @@
 import { Database } from "@/types/supabase";
 import { Button } from "../ui/button";
+import Input from "../ui/Input";
 
 type Props = {};
 
@@ -46,11 +47,11 @@ const PostJobForm = (props: Props) => {
         >
             <div className={buttonStyles}>
                 <p className={paraghraphStyles}>Job Title</p>
-                <input type="text" name="job_title" placeholder="Job Title" />
+                <Input type="text" name="job_title" placeholder="Job Title" />
             </div>
             <div className={buttonStyles}>
                 <p className={paraghraphStyles}>Company Name</p>
-                <input
+                <Input
                     type="text"
                     name="company_name"
                     placeholder="Company Name"
@@ -58,11 +59,11 @@ const PostJobForm = (props: Props) => {
             </div>
             <div className={buttonStyles}>
                 <p className={paraghraphStyles}>Location</p>
-                <input type="text" name="location" placeholder="Location" />
+                <Input type="text" name="location" placeholder="Location" />
             </div>
             <div className={buttonStyles}>
                 <p className={paraghraphStyles}>Salary Min</p>
-                <input
+                <Input
                     type="number"
                     name="salary_min"
                     placeholder="Salary Min"
@@ -70,23 +71,23 @@ const PostJobForm = (props: Props) => {
             </div>
             <div className={buttonStyles}>
                 <p className={paraghraphStyles}>Salary Max</p>
-                <input
+                <Input
                     type="number"
                     name="salary_max"
                     placeholder="Salary Max"
                 />
             </div>
-            <div className={buttonStyles}>
+            <div className={`${buttonStyles} flex flex-col gap-2`}>
                 <p className={paraghraphStyles}>Tags (Max 5)</p>
-                <input type="text" name="tag1" placeholder="Tag 1" />
-                <input type="text" name="tag2" placeholder="Tag 2" />
-                <input type="text" name="tag3" placeholder="Tag 3" />
-                <input type="text" name="tag4" placeholder="Tag 4" />
-                <input type="text" name="tag5" placeholder="Tag 5" />
+                <Input type="text" name="tag1" placeholder="Tag" />
+                <Input type="text" name="tag2" placeholder="Tag" />
+                <Input type="text" name="tag3" placeholder="Tag" />
+                <Input type="text" name="tag4" placeholder="Tag" />
+                <Input type="text" name="tag5" placeholder="Tag" />
             </div>
             <div className={buttonStyles}>
                 <p className={paraghraphStyles}>Description</p>
-                <input
+                <Input
                     type="text"
                     name="description"
                     placeholder="Description"
