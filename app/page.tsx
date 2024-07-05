@@ -1,12 +1,13 @@
 "use client";
 
+import Description from "@/components/Description";
 import JobCards from "@/components/JobCards/JobCards";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
     return (
         <main className=" w-full p-2">
-            hello
+            <Description />
             <Button variant="default" size="default">
                 Elemen
             </Button>
