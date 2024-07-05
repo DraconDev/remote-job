@@ -1,12 +1,9 @@
-import { useState } from "react";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
 
 const QuillEditor = dynamic(() => import("react-quill"), { ssr: false });
 
-export default function Home() {
-    const [content, setContent] = useState("");
-
+export default function Home(content: any, setContent: any) {
     const quillModules = {
         toolbar: [
             [{ header: [1, 2, 3, false] }],
@@ -41,16 +38,14 @@ export default function Home() {
     };
 
     return (
-        <div className="h-screen w-screen flex items-center flex-col">
-            <div className="h-full w-[90vw]">
-                <QuillEditor
-                    value={content}
-                    onChange={handleEditorChange}
-                    modules={quillModules}
-                    formats={quillFormats}
-                    className="w-full h-[70%] mt-10 bg-white"
-                />
-            </div>
+        <div className="h-[600px] w-[600px] ">
+            <QuillEditor
+                value={content}
+                onChange={handleEditorChange}
+                modules={quillModules}
+                formats={quillFormats}
+                className="w-full h-[70%] mt-10 bg-white"
+            />
         </div>
     );
 }

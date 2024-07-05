@@ -1,10 +1,13 @@
 import { Database } from "@/types/supabase";
 import { Button } from "../ui/button";
 import Input from "../ui/Input";
+import Description from "@/app/Quill/Description";
+import { useState } from "react";
 
 type Props = {};
 
 const PostJobForm = (props: Props) => {
+    const [content, setContent] = useState();
     async function createInvoice(formData: FormData) {
         "use server";
 
@@ -93,6 +96,8 @@ const PostJobForm = (props: Props) => {
                     className="p-1 w-full"
                 />
             </div>
+
+            <Description content={content} setContent={setContent} />
             <div className="flex justify-end">
                 <Button
                     type="submit"
