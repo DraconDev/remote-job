@@ -43,7 +43,7 @@ const PostJobForm = (props: Props) => {
     return (
         <form
             action={createInvoice}
-            className="w-full  flex justify-center flex-col gap-3 pt-1 border-2 border-gray-300 rounded-lg p-1"
+            className="w-full  flex justify-center flex-col gap-3 pt-1 border-2 border-gray-300 rounded-lg p-1 w-max-[700px] m-auto"
         >
             <div className={buttonStyles}>
                 <p className={paraghraphStyles}>Job Title</p>
