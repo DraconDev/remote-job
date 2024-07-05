@@ -1,16 +1,14 @@
-"use client";
-
-import { Button } from "@/components/ui/button";
-import { createJobPost } from "@/utils/supabase/actions";
+import PostJobForm from "@/components/PostJobForm/PostJobForm";
 
 type Props = {};
 
 const page = (props: Props) => {
     return (
         <div>
-            <Button onClick={() => createJobPost({ job_title: "job_title" })}>
+            <PostJobForm />
+            {/* <Button onClick={() => createJobPost({ job_title: "job_title" })}>
                 Post
-            </Button>
+            </Button> */}
         </div>
     );
 };
