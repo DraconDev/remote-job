@@ -1,3 +1,7 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { Database } from "@/types/supabase";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 
@@ -12,20 +16,19 @@ const page = (props: Props) => {
     const supabase = createClient(cookieStore);
 
     // create job_post in supabase
-    function createJobPost(jobPost: any) {
-        return supabase.from("jobPost").insert(jobPost);
-        // const { data: jobPost } = supabase.from("jobPost").insert({
-        //     created_at: new Date(),
-        //     salary_min: 10000,
-        //     salary_max: 20000,
-        //     tags: ["tag1", "tag2"],
-        //     description: "description",
-        //     location: "location",
-        //     company_name: "company_name",
-        //     job_title: "job_title",
+    function createJobPost(
+        job_post: Database["public"]["Tables"]["job_post"]["Insert"]
+    ) {
+        return supabase.from("job_post").insert(job_post);
     }
 
-    return <div>page</div>;
+    return (
+        <div>
+            <Button onClick={() => createJobPost({ job_title: "job_title" })}>
+                Post
+            </Button>
+        </div>
+    );
 };
 
 export default page;
