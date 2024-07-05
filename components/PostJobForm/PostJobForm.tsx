@@ -87,10 +87,10 @@ const PostJobForm = (props: Props) => {
             </div>
             <div className={buttonStyles}>
                 <p className={paraghraphStyles}>Description</p>
-                <Input
-                    type="text"
+                <textarea
                     name="description"
                     placeholder="Description"
+                    className="p-1 w-full"
                 />
             </div>
             <div className="flex justify-end">
