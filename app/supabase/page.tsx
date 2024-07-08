@@ -1,4 +1,3 @@
-import { Tiptap } from "@/components/TipTap/Description";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 export default async function Page() {
@@ -9,7 +8,6 @@ export default async function Page() {
 
     return (
         <div className="py-4">
-            <Tiptap />
             <ul>
                 {jobPost?.map((todo) => (
                     <li key={todo.id}>{todo}</li>
