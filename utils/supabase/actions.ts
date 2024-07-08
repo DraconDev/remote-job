@@ -13,3 +13,12 @@ export async function createJobPost(
 
     return supabase.from("job_post").insert(job_post);
 }
+
+export async function getJobs() {
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+    const { data: jobPost } = await supabase.from("job_post").select();
+    console.log(jobPost);
+
+    return jobPost as Database["public"]["Tables"]["job_post"]["Row"][];
+}
