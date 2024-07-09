@@ -1,16 +1,7 @@
-type Props = {
-    jobTitle: string;
-    companyName: string;
-    location: string;
-    moneyMin: number;
-    moneyMax: number;
-    time: string;
-    tags: string[];
-    description?: string;
-};
+import { Database } from "@/types/supabase";
 
-function JobCard(props: Props) {
-    return <div className=""></div>;
+function JobCard(card: Database["public"]["Tables"]["job_post"]["Row"]) {
+    return <div className="" id="">{card.apply_link}</div>;
 }
 
 export default JobCard;
