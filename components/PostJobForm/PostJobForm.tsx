@@ -1,7 +1,9 @@
+"use client";
+import { Database } from "@/types/supabase";
 import { Button } from "../ui/button";
 import Input from "../ui/Input";
-import Description from "@/app/Quill/Description";
 import { useState } from "react";
+import { createJobPost } from "@/utils/supabase/actions";
 
 type Props = {};
 
@@ -15,6 +17,29 @@ const PostJobForm = (props: Props) => {
         const tag3 = JSON.parse(formData.get("tag3") as string) || "";
         const tag4 = JSON.parse(formData.get("tag4") as string) || "";
         const tag5 = JSON.parse(formData.get("tag5") as string) || "";
+
+        const rawFormData: Database["public"]["Tables"]["job_post"]["Insert"] =
+            {
+                salary_min: formData.get("salary_min")
+                    ? parseInt(formData.get("salary_min") as string)
+                    : null,
+                salary_max: formData.get("salary_max")
+                    ? parseInt(formData.get("salary_max") as string)
+                    : null,
+                tags:
+                    [
+                        tag1 && tag1,
+                        tag2 && tag2,
+                        tag3 && tag3,
+                        tag4 && tag4,
+                        tag5 && tag5,
+                    ] || [],
+                description: (formData.get("description") as string) || "",
+                location: (formData.get("location") as string) || "",
+                company_name: (formData.get("company_name") as string) || "",
+                job_title: (formData.get("job_title") as string) || "",
+            };
+        createJobPost(rawFormData);
     }
 
     // add outline when active
@@ -36,6 +61,10 @@ const PostJobForm = (props: Props) => {
                     name="company_name"
                     placeholder="Company Name"
                 />
+            </div>
+            <div className={buttonStyles}>
+                <p className={paraghraphStyles}>Apply link</p>
+                <Input type="text" name="apply_link" placeholder="Apply link" />
             </div>
             <div className={buttonStyles}>
                 <p className={paraghraphStyles}>Location</p>
@@ -74,7 +103,7 @@ const PostJobForm = (props: Props) => {
                 />
             </div>
 
-            <Description content={content} setContent={setContent} />
+            {/* <Description content={content} setContent={setContent} /> */}
             <div className="flex justify-end">
                 <Button
                     type="submit"
