@@ -38,24 +38,25 @@ const PostJobForm = (props: Props) => {
                 location: (formData.get("location") as string) || "",
                 company_name: (formData.get("company_name") as string) || "",
                 job_title: (formData.get("job_title") as string) || "",
+                apply_link: (formData.get("apply_link") as string) || "",
             };
         createJobPost(rawFormData);
     }
 
     // add outline when active
     const buttonStyles = "font-bold py-1 px-2 ";
-    const paraghraphStyles = "font-bold text-xl border-b-2 border-gray-300";
+    const paragraphStyles = "font-bold text-xl border-b-2 border-gray-300";
     return (
         <form
             action={createInvoice}
             className="w-full  flex justify-center flex-col gap-3 pt-1 border-2 border-gray-300 rounded-lg p-1 w-max-[700px] m-auto"
         >
             <div className={buttonStyles}>
-                <p className={paraghraphStyles}>Job Title</p>
+                <p className={paragraphStyles}>Job Title</p>
                 <Input type="text" name="job_title" placeholder="Job Title" />
             </div>
             <div className={buttonStyles}>
-                <p className={paraghraphStyles}>Company Name</p>
+                <p className={paragraphStyles}>Company Name</p>
                 <Input
                     type="text"
                     name="company_name"
@@ -63,15 +64,15 @@ const PostJobForm = (props: Props) => {
                 />
             </div>
             <div className={buttonStyles}>
-                <p className={paraghraphStyles}>Apply link</p>
+                <p className={paragraphStyles}>Apply link</p>
                 <Input type="text" name="apply_link" placeholder="Apply link" />
             </div>
             <div className={buttonStyles}>
-                <p className={paraghraphStyles}>Location</p>
+                <p className={paragraphStyles}>Location</p>
                 <Input type="text" name="location" placeholder="Location" />
             </div>
             <div className={buttonStyles}>
-                <p className={paraghraphStyles}>Salary Min</p>
+                <p className={paragraphStyles}>Salary Min</p>
                 <Input
                     type="number"
                     name="salary_min"
@@ -79,7 +80,7 @@ const PostJobForm = (props: Props) => {
                 />
             </div>
             <div className={buttonStyles}>
-                <p className={paraghraphStyles}>Salary Max</p>
+                <p className={paragraphStyles}>Salary Max</p>
                 <Input
                     type="number"
                     name="salary_max"
@@ -87,7 +88,7 @@ const PostJobForm = (props: Props) => {
                 />
             </div>
             <div className={`${buttonStyles} flex flex-col gap-2`}>
-                <p className={paraghraphStyles}>Tags (Max 5)</p>
+                <p className={paragraphStyles}>Tags (Max 5)</p>
                 <Input type="text" name="tag1" placeholder="Tag" />
                 <Input type="text" name="tag2" placeholder="Tag" />
                 <Input type="text" name="tag3" placeholder="Tag" />
@@ -95,7 +96,7 @@ const PostJobForm = (props: Props) => {
                 <Input type="text" name="tag5" placeholder="Tag" />
             </div>
             <div className={buttonStyles}>
-                <p className={paraghraphStyles}>Description</p>
+                <p className={paragraphStyles}>Description</p>
                 <textarea
                     name="description"
                     placeholder="Description"
