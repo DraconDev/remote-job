@@ -4,13 +4,14 @@ export default async function Page() {
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
 
-    const { data: jobPost } = await supabase.from("jobPost").select();
+    const { data: job_post } = await supabase.from("job_post").select();
 
     return (
         <div className="py-4">
+            {job_post && JSON.stringify(job_post)}
             <ul>
-                {jobPost?.map((todo) => (
-                    <li key={todo.id}>{todo}</li>
+                {job_post?.map((post) => (
+                    <li key={post.id}>{post.apply_link}</li>
                 ))}
             </ul>
         </div>

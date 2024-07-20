@@ -1,4 +1,4 @@
-"use client";
+
 
 import JobContainer from "@/components/JobCards/JobContainer";
 import { Button } from "@/components/ui/button";
