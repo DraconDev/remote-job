@@ -1,11 +1,13 @@
 "use client";
-import { Button } from "../ui/button";
+
 import { useState } from "react";
 
 import Description from "@/components/Quill/Description";
 import FormElem from "./FormElem";
 import PostJobSection from "./PostJobSection";
 import { Database } from "@/types/supabase";
+import { Button } from "../ui/button";
+import { createJobPost } from "@/utils/supabase/actions";
 
 type Props = {};
 
@@ -55,7 +57,11 @@ const PostForm = (props: Props) => {
             description,
         } as Database["public"]["Tables"]["job_post"]["Insert"];
 
-        // createJobPost(jobPost);
+        try {
+            createJobPost(jobPost);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -70,6 +76,16 @@ const PostForm = (props: Props) => {
                         type={formData[key].type}
                         name={key}
                         placeholder={formData[key].placeholder}
+                        value={formData[key].value || ""}
+                        onChange={(e) => {
+                            setFormData((prev) => ({
+                                ...prev,
+                                [key]: {
+                                    ...prev[key],
+                                    value: e.target.value,
+                                },
+                            }));
+                        }}
                     />
                 </PostJobSection>
             ))}
@@ -80,6 +96,16 @@ const PostForm = (props: Props) => {
                         type={tags[key].type}
                         name={key}
                         placeholder={tags[key].placeholder}
+                        value={tags[key].value || ""}
+                        onChange={(e) => {
+                            setTags((prev) => ({
+                                ...prev,
+                                [key]: {
+                                    ...prev[key],
+                                    value: e.target.value,
+                                },
+                            }));
+                        }}
                     />
                 ))}
             </PostJobSection>
