@@ -45,7 +45,7 @@ export default function Home({ content, setContent }: any) {
                 onChange={handleEditorChange}
                 modules={quillModules}
                 formats={quillFormats}
-                className="w-full h-[92%]  bg-white"
+                className="w-full h-[90%]  bg-white"
             />
         </div>
     );

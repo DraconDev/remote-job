@@ -67,8 +67,16 @@ const PostForm = (props: Props) => {
             placeholder: "Application Link or Email",
         },
         location: { value: "", type: "text", placeholder: "Location" },
-        salary_min: { value: "", type: "number", placeholder: "Salary Min" },
-        salary_max: { value: "", type: "number", placeholder: "Salary Max" },
+        salary_min: {
+            value: "",
+            type: "number",
+            placeholder: "Salary Min in USD",
+        },
+        salary_max: {
+            value: "",
+            type: "number",
+            placeholder: "Salary Max in USD",
+        },
     });
 
     const tagSchema = z.object({

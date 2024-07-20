@@ -6,8 +6,6 @@ type Props = {};
 const JobContainer = async (props: Props) => {
     const data = await getJobs();
 
-    
-
     // useEffect(() => {
     //     if (!data) {
     //         const cookieStore = cookies();
@@ -22,7 +20,8 @@ const JobContainer = async (props: Props) => {
     //     }
     // }, []);
 
-    return <JobCards data={data} />;
+    // return <JobCards data={data} />;
+    return data && <JobCards data={data} />;
 };
 
 export default JobContainer;

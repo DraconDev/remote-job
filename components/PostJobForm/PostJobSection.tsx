@@ -6,7 +6,7 @@ type Props = {
 
 const PostJobSection = (props: Props) => {
     const buttonStyles = "font-bold py-1 px-2 ";
-    const paragraphStyles = "font-bold text-xl border-b-2 border-gray-300";
+    const paragraphStyles = "font-bold text-xl border-b-2 border-accent";
     return (
         <div className={`${buttonStyles} flex flex-col gap-2`}>
             <p className={paragraphStyles}>{props.title}</p>
