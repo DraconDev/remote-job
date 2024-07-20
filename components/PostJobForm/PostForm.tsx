@@ -1,0 +1,81 @@
+"use client";
+import { Button } from "../ui/button";
+import { useState } from "react";
+import { createInvoice } from "@/utils/supabase/actions";
+import Description from "@/components/Quill/Description";
+import FormElem from "./FormElem";
+import PostJobSection from "./PostJobSection";
+
+type Props = {};
+
+type FormDataType = {
+    [key: string]: {
+        value: string;
+        type: string;
+        placeholder: string;
+        extra?: string;
+    };
+};
+
+const PostForm = (props: Props) => {
+    const [formData, setFormData] = useState<FormDataType>({
+        job_title: { value: "", type: "text", placeholder: "Job Title" },
+        company_name: { value: "", type: "text", placeholder: "Company Name" },
+        apply_link: { value: "", type: "text", placeholder: "Apply Link" },
+        location: { value: "", type: "text", placeholder: "Location" },
+        salary_min: { value: "", type: "number", placeholder: "Salary Min" },
+        salary_max: { value: "", type: "number", placeholder: "Salary Max" },
+    });
+
+    const [tags, setTags] = useState<FormDataType>({
+        tag1: { value: "", type: "text", placeholder: "Tag 1" },
+        tag2: { value: "", type: "text", placeholder: "Tag 2" },
+        tag3: { value: "", type: "text", placeholder: "Tag 3" },
+        tag4: { value: "", type: "text", placeholder: "Tag 4" },
+        tag5: { value: "", type: "text", placeholder: "Tag 5" },
+    });
+
+    const [description, setDescription] = useState("");
+
+    return (
+        <form
+            action={createInvoice}
+            className="w-full  flex justify-center flex-col gap-3 pt-1 border-2 border-gray-300 rounded-lg p-1 w-max-[700px] m-auto"
+        >
+            {Object.keys(formData).map((key) => (
+                <PostJobSection key={key} title={formData[key].placeholder}>
+                    <FormElem
+                        key={key}
+                        type={formData[key].type}
+                        name={key}
+                        placeholder={formData[key].placeholder}
+                    />
+                </PostJobSection>
+            ))}
+            <PostJobSection title="Tags (Max 5)">
+                {Object.keys(tags).map((key) => (
+                    <FormElem
+                        key={key}
+                        type={tags[key].type}
+                        name={key}
+                        placeholder={tags[key].placeholder}
+                    />
+                ))}
+            </PostJobSection>
+
+            <PostJobSection title="Description" />
+            <Description content={description} setContent={setDescription} />
+            <div className="flex justify-end">
+                <Button
+                    type="submit"
+                    variant="default"
+                    className="max-w-[300px] align"
+                >
+                    Submit
+                </Button>
+            </div>
+        </form>
+    );
+};
+
+export default PostForm;

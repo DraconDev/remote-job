@@ -1,9 +1,10 @@
+"use client";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
 
 const QuillEditor = dynamic(() => import("react-quill"), { ssr: false });
 
-export default function Home(content: any, setContent: any) {
+export default function Home({ content, setContent }: any) {
     const quillModules = {
         toolbar: [
             [{ header: [1, 2, 3, false] }],
@@ -38,13 +39,13 @@ export default function Home(content: any, setContent: any) {
     };
 
     return (
-        <div className="h-[600px] w-[600px] ">
+        <div className="h-[500px] min-w-[600px] w-full p-1 ">
             <QuillEditor
                 value={content}
                 onChange={handleEditorChange}
                 modules={quillModules}
                 formats={quillFormats}
-                className="w-full h-[70%] mt-10 bg-white"
+                className="w-full h-[92%]  bg-white"
             />
         </div>
     );

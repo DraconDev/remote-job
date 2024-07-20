@@ -1,11 +1,11 @@
-import PostJobForm from "@/components/PostJobForm/PostJobForm";
+import PostForm from "@/components/PostJobForm/PostForm";
 
 type Props = {};
 
 const page = (props: Props) => {
     return (
         <div>
-            <PostJobForm />
+            <PostForm />
             {/* <Button onClick={() => createJobPost({ job_title: "job_title" })}>
                 Post
             </Button> */}

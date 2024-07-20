@@ -3,6 +3,9 @@ import { Button } from "../ui/button";
 import Input from "../ui/Input";
 import { useState } from "react";
 import { createInvoice } from "@/utils/supabase/actions";
+import Description from "@/components/Quill/Description";
+import FormElem from "./FormElem";
+import PostJobSection from "./PostJobSection";
 
 type Props = {};
 
@@ -17,22 +20,13 @@ const PostJobForm = (props: Props) => {
             action={createInvoice}
             className="w-full  flex justify-center flex-col gap-3 pt-1 border-2 border-gray-300 rounded-lg p-1 w-max-[700px] m-auto"
         >
-            <div className={buttonStyles}>
-                <p className={paragraphStyles}>Job Title</p>
-                <Input type="text" name="job_title" placeholder="Job Title" />
-            </div>
-            <div className={buttonStyles}>
-                <p className={paragraphStyles}>Company Name</p>
-                <Input
+            <PostJobSection>
+                <FormElem
                     type="text"
-                    name="company_name"
-                    placeholder="Company Name"
+                    name="job_title"
+                    placeholder="Job Title"
                 />
-            </div>
-            <div className={buttonStyles}>
-                <p className={paragraphStyles}>Apply link</p>
-                <Input type="text" name="apply_link" placeholder="Apply link" />
-            </div>
+            </PostJobSection>
             <div className={buttonStyles}>
                 <p className={paragraphStyles}>Location</p>
                 <Input type="text" name="location" placeholder="Location" />
@@ -70,7 +64,7 @@ const PostJobForm = (props: Props) => {
                 />
             </div>
 
-            {/* <Description content={content} setContent={setContent} /> */}
+            <Description />
             <div className="flex justify-end">
                 <Button
                     type="submit"
