@@ -1,4 +1,5 @@
 "use client";
+import { z } from "zod";
 
 import { useState } from "react";
 
@@ -11,14 +12,49 @@ import { createJobPost } from "@/utils/supabase/actions";
 
 type Props = {};
 
-type FormDataType = {
-    [key: string]: {
-        value: string;
-        type: string;
-        placeholder: string;
-        extra?: string;
-    };
-};
+// type FormDataType = {
+//     [key: string]: {
+//         value: string;
+//         type: string;
+//         placeholder: string;
+//         extra?: string;
+//     };
+// };
+
+const schema = z.object({
+    job_title: z.object({
+        value: z.string().min(3, "Required"),
+        type: z.string().default("text"),
+        placeholder: z.string().default("Job Title"),
+    }),
+    company_name: z.object({
+        value: z.string().min(3, "Required"),
+        type: z.string().default("text"),
+        placeholder: z.string().default("Company Name"),
+    }),
+    apply_link: z.object({
+        value: z.string().min(3, "Required"),
+        type: z.string().default("text"),
+        placeholder: z.string().default("Apply Link"),
+    }),
+    location: z.object({
+        value: z.string().min(3, "Required"),
+        type: z.string().default("text"),
+        placeholder: z.string().default("Location"),
+    }),
+    salary_min: z.object({
+        value: z.number().min(1, "Required"),
+        type: z.string().default("number"),
+        placeholder: z.string().default("Salary Min"),
+    }),
+    salary_max: z.object({
+        value: z.number().min(1, "Required"),
+        type: z.string().default("number"),
+        placeholder: z.string().default("Salary Max"),
+    }),
+});
+
+type FormDataType = z.infer<typeof schema>;
 
 const PostForm = (props: Props) => {
     const [formData, setFormData] = useState<FormDataType>({
