@@ -35,7 +35,7 @@ const schema = z.object({
     apply_link: z.object({
         value: z.string().min(3, "Required"),
         type: z.string().default("text"),
-        placeholder: z.string().default("Apply Link"),
+        placeholder: z.string().default("Application Link or Email"),
     }),
     location: z.object({
         value: z.string().min(3, "Required"),
@@ -43,30 +43,69 @@ const schema = z.object({
         placeholder: z.string().default("Location"),
     }),
     salary_min: z.object({
-        value: z.number().min(1, "Required"),
+        value: z.string().min(1, "Required"),
         type: z.string().default("number"),
         placeholder: z.string().default("Salary Min"),
     }),
     salary_max: z.object({
-        value: z.number().min(1, "Required"),
+        value: z.string().min(1, "Required"),
         type: z.string().default("number"),
         placeholder: z.string().default("Salary Max"),
     }),
 });
 
 type FormDataType = z.infer<typeof schema>;
+// type FormDataType = keyof typeof schema;
 
 const PostForm = (props: Props) => {
     const [formData, setFormData] = useState<FormDataType>({
         job_title: { value: "", type: "text", placeholder: "Job Title" },
         company_name: { value: "", type: "text", placeholder: "Company Name" },
-        apply_link: { value: "", type: "text", placeholder: "Apply Link" },
+        apply_link: {
+            value: "",
+            type: "text",
+            placeholder: "Application Link or Email",
+        },
         location: { value: "", type: "text", placeholder: "Location" },
         salary_min: { value: "", type: "number", placeholder: "Salary Min" },
         salary_max: { value: "", type: "number", placeholder: "Salary Max" },
     });
 
-    const [tags, setTags] = useState<FormDataType>({
+    const tagSchema = z.object({
+        tag1: z.object({
+            value: z.string().min(0, "Required"),
+            type: z.string().default("text"),
+            placeholder: z.string().default("Tag 1"),
+        }),
+
+        tag2: z.object({
+            value: z.string().min(0, "Required"),
+            type: z.string().default("text"),
+            placeholder: z.string().default("Tag 2"),
+        }),
+
+        tag3: z.object({
+            value: z.string().min(0, "Required"),
+            type: z.string().default("text"),
+            placeholder: z.string().default("Tag 3"),
+        }),
+
+        tag4: z.object({
+            value: z.string().min(0, "Required"),
+            type: z.string().default("text"),
+            placeholder: z.string().default("Tag 4"),
+        }),
+
+        tag5: z.object({
+            value: z.string().min(0, "Required"),
+            type: z.string().default("text"),
+            placeholder: z.string().default("Tag 5"),
+        }),
+    });
+
+    type TagSchema = z.infer<typeof tagSchema>;
+
+    const [tags, setTags] = useState<TagSchema>({
         tag1: { value: "", type: "text", placeholder: "Tag 1" },
         tag2: { value: "", type: "text", placeholder: "Tag 2" },
         tag3: { value: "", type: "text", placeholder: "Tag 3" },
@@ -78,7 +117,13 @@ const PostForm = (props: Props) => {
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        console.log(formData, tags, description);
+        // console.log(formData, tags, description);
+        try {
+            schema.parse(formData);
+        } catch (error) {
+            console.log(error);
+            return;
+        }
 
         const jobPost = {
             job_title: formData.job_title.value,
@@ -106,18 +151,25 @@ const PostForm = (props: Props) => {
             className="w-full  flex justify-center flex-col gap-3 pt-1 border-2 border-gray-300 rounded-lg p-1 w-max-[700px] m-auto"
         >
             {Object.keys(formData).map((key) => (
-                <PostJobSection key={key} title={formData[key].placeholder}>
+                <PostJobSection
+                    key={key}
+                    title={formData[key as keyof typeof formData].placeholder}
+                >
                     <FormElem
                         key={key}
-                        type={formData[key].type}
+                        type={formData[key as keyof typeof formData].type}
                         name={key}
-                        placeholder={formData[key].placeholder}
-                        value={formData[key].value || ""}
+                        placeholder={
+                            formData[key as keyof typeof formData].placeholder
+                        }
+                        value={
+                            formData[key as keyof typeof formData].value || ""
+                        }
                         onChange={(e) => {
                             setFormData((prev) => ({
                                 ...prev,
                                 [key]: {
-                                    ...prev[key],
+                                    ...prev[key as keyof typeof prev],
                                     value: e.target.value,
                                 },
                             }));
@@ -129,15 +181,15 @@ const PostForm = (props: Props) => {
                 {Object.keys(tags).map((key) => (
                     <FormElem
                         key={key}
-                        type={tags[key].type}
+                        type={tags[key as keyof typeof tags].type}
                         name={key}
-                        placeholder={tags[key].placeholder}
-                        value={tags[key].value || ""}
+                        placeholder={tags[key as keyof typeof tags].placeholder}
+                        value={tags[key as keyof typeof tags].value || ""}
                         onChange={(e) => {
                             setTags((prev) => ({
                                 ...prev,
                                 [key]: {
-                                    ...prev[key],
+                                    ...prev[key as keyof typeof tags],
                                     value: e.target.value,
                                 },
                             }));

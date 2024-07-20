@@ -16,6 +16,7 @@ const FormElem = (props: Props) => {
                 placeholder={props.placeholder}
                 value={props.value}
                 onChange={props.onChange}
+                className={"p-1"}
             />
         </>
     );
