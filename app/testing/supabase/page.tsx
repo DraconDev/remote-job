@@ -9,11 +9,11 @@ export default async function Page() {
     return (
         <div className="py-4">
             {job_post && JSON.stringify(job_post)}
-            <ul>
+            {/* <ul>
                 {job_post?.map((post) => (
                     <li key={post.id}>{post.apply_link}</li>
                 ))}
-            </ul>
+            </ul> */}
         </div>
     );
 }
