@@ -10,7 +10,11 @@ const Page = async (props: Props) => {
     // download image from supabase
     const {
         data: { publicUrl: url },
-    } = await supabase.storage.from("logos").getPublicUrl("avatar.png");
+    } = await supabase.storage
+        .from("remoteworknexus")
+        .getPublicUrl("logos/volvo.png");
+
+    console.log(url);
     return (
         <div>
             Test storege link
