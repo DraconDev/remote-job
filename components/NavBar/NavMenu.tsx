@@ -1,7 +1,7 @@
 "use client";
 
 import { FaSearch } from "react-icons/fa";
-import CustomLink from "../CustomLink";
+import CustomLink from "../ui/CustomLink";
 
 type Props = {};
 
