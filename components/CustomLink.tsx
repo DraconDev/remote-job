@@ -6,7 +6,7 @@ type Props = {
     add?: string;
 };
 
-const NavLink = (props: Props) => {
+const CustomLink = (props: Props) => {
     return (
         <Link
             href={props.href}
@@ -17,4 +17,4 @@ const NavLink = (props: Props) => {
     );
 };
 
-export default NavLink;
+export default CustomLink;

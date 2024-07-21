@@ -1,24 +1,22 @@
 "use client";
 
 import { FaSearch } from "react-icons/fa";
-import NavLink from "./NavLink";
+import CustomLink from "../CustomLink";
+
 type Props = {};
 
 const NavMenu = (props: Props) => {
     return (
         <div className="py-3 bg-primary z-50  flex justify-center">
             <div className="container justify-between flex px-3 ">
-                <NavLink href="/">RWN</NavLink>
+                <CustomLink href="/">RWN</CustomLink>
                 <div className=" flex gap-3 items-center">
-                    <NavLink href="/">
+                    <CustomLink href="/">
                         <FaSearch className="w-6 h-6" />
-                    </NavLink>
-                    <NavLink
-                        href="/postjob"
-                        add="bg-accent"
-                    >
+                    </CustomLink>
+                    <CustomLink href="/postjob" add="bg-accent">
                         Post a job
-                    </NavLink>
+                    </CustomLink>
                 </div>
             </div>
         </div>
