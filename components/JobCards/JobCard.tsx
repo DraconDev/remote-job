@@ -1,4 +1,5 @@
 import { Database } from "@/types/supabase";
+import Link from "next/link";
 
 function JobCard(card: Database["public"]["Tables"]["job_post"]["Row"]) {
     const boxes = [
@@ -9,9 +10,10 @@ function JobCard(card: Database["public"]["Tables"]["job_post"]["Row"]) {
         (item) => Boolean(item) && (!Array.isArray(item) || item.length > 0)
     );
     return (
-        <div
+        <Link
             className="w-full h-[110px] border-2 p-2  rounded-md border-gray-300 flex justify-between items-center "
             id=""
+            href={`/job/${card.id}`}
         >
             <div className="flex flex-col grow">
                 <div className="text-xl font-bold ">{card.job_title}</div>
@@ -30,7 +32,7 @@ function JobCard(card: Database["public"]["Tables"]["job_post"]["Row"]) {
             <div className="flex place-items-start justify-end h-full">
                 <p className="flex shrink-0">{card.created_at.slice(0, 10)}</p>
             </div>
-        </div>
+        </Link>
     );
 }
 
