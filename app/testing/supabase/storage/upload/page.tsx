@@ -1,3 +1,4 @@
+import MyDropZone from "@/components/Dropzone/Dropzone";
 import { createClient } from "@/utils/supabase/server";
 
 import { cookies } from "next/headers";
@@ -13,8 +14,10 @@ const Page = async (props: Props) => {
     //     .upload("logos/volvo.png", "volvo.png");
 
     return (
-        <div>
+        <div className="flex flex-col">
             UPload <input type="file" />
+            divide
+            <MyDropZone />
         </div>
     );
 };
