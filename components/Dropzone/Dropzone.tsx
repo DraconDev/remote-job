@@ -11,6 +11,10 @@ function MyDropZone() {
     const onDrop = useCallback((acceptedFiles: File[]) => {
         // Update the state to the first selected image file
         const file = acceptedFiles[0];
+        if (file.size > 1024 * 64 * 64) { // 64x64px image in bytes
+            console.log("File size is too large");
+            return;
+        }
         const reader = new FileReader();
 
         reader.onload = (e) => {
@@ -31,10 +35,10 @@ function MyDropZone() {
     });
     return (
         <>
-            <div className="">Upload a 128x128px png or jpeg</div>
+            <div className="">64x64px large avatar in png or jpeg format</div>
             <div
                 {...getRootProps()}
-                className="bg-red-400 w-[200px] h-[200px]  hover:cursor-pointer rounded-md"
+                className="bg-red-400 w-[64px] h-[64px]  hover:cursor-pointer rounded-md"
             >
                 <input {...getInputProps()} />
                 {selectedImage ? (
@@ -42,12 +46,12 @@ function MyDropZone() {
                         src={selectedImage}
                         alt="Selected"
                         className="w-full h-full object-cover"
-                        width="200"
-                        height="200"
+                        width="64"
+                        height="64"
                     />
                 ) : (
                     <div className="justify-center items-center flex w-full h-full ">
-                        <MdUpload className="w-24 h-24" />
+                        <MdUpload className="w-16 h-16" />
                     </div>
                 )}
             </div>
