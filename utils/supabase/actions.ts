@@ -18,6 +18,8 @@ export async function createJobPost(formData: FormData) {
         formData.get("tag5")?.toString() ?? "",
     ].filter((tag) => tag !== "");
 
+    const logo_url = await uploadLogo(formData.get("logo") as File);
+
     const job_post = {
         job_title: formData.get("job_title") as string,
         description: formData.get("description") as string,
@@ -27,9 +29,9 @@ export async function createJobPost(formData: FormData) {
         salary_min: formData.get("salary_min") as string,
         salary_max: formData.get("salary_max") as string,
         tags: tags,
+        logo: logo_url,
     };
     supabase.from("job_post").insert(job_post);
-    uploadLogo(formData.get("image") as File);
 }
 
 export async function getJobs() {

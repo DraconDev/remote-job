@@ -8,8 +8,6 @@ import Image from "next/image";
 function MyDropZone() {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-    
-
     const onDrop = useCallback((acceptedFiles: File[]) => {
         // Update the state to the first selected image file
         const file = acceptedFiles[0];
@@ -43,7 +41,7 @@ function MyDropZone() {
                 {...getRootProps()}
                 className="border-2 border-black w-[64px] h-[64px]  hover:cursor-pointer  rounded-full"
             >
-                <input {...getInputProps()} name="image" />
+                <input {...getInputProps()} name="logo" />
                 {selectedImage ? (
                     <Image
                         src={selectedImage}
