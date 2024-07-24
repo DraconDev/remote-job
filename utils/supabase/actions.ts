@@ -1,17 +1,14 @@
 "use server";
+import { v4 as uuidv4 } from "uuid";
 
 import { Database } from "@/types/supabase";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
-import { generateRandomNumericId } from "../helpers/helper";
 
 export async function createJobPost(formData: FormData) {
     console.log(formData);
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
-
-    // random id
-    const id = generateRandomNumericId();
 
     const tags = [
         formData.get("tag1")?.toString() ?? "",
@@ -22,7 +19,6 @@ export async function createJobPost(formData: FormData) {
     ].filter((tag) => tag !== "");
 
     const job_post = {
-        id,
         job_title: formData.get("job_title") as string,
         description: formData.get("description") as string,
         company_name: formData.get("company_name") as string,
@@ -32,7 +28,8 @@ export async function createJobPost(formData: FormData) {
         salary_max: formData.get("salary_max") as string,
         tags: tags,
     };
-    return supabase.from("job_post").insert(job_post);
+    supabase.from("job_post").insert(job_post);
+    uploadLogo(formData.get("image") as File);
 }
 
 export async function getJobs() {
@@ -42,6 +39,24 @@ export async function getJobs() {
     console.log(jobPost, "jobPost");
 
     return jobPost as Database["public"]["Tables"]["job_post"]["Row"][];
+}
+
+export async function uploadLogo(logo: File) {
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+
+    const uniqueId = uuidv4();
+
+    const { data, error } = await supabase.storage
+        .from("remoteworknexus")
+        .upload("logos/" + uniqueId + ".png", logo);
+
+    if (error) {
+        console.log(error);
+        return error;
+    }
+
+    return data.path;
 }
 
 export async function getJobById(id: string) {
