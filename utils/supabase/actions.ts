@@ -29,7 +29,7 @@ export async function createJobPost(formData: FormData) {
         salary_min: formData.get("salary_min") as string,
         salary_max: formData.get("salary_max") as string,
         tags: tags,
-        logo: logo_url,
+        logo_path: logo_url,
     };
     supabase.from("job_post").insert(job_post);
 }
