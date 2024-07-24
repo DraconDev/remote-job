@@ -3,12 +3,36 @@
 import { Database } from "@/types/supabase";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
+import { generateRandomNumericId } from "../helpers/helper";
 
 export async function createJobPost(formData: FormData) {
     console.log(formData);
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
-    // return supabase.from("job_post").insert(job_post);
+
+    // random id
+    const id = generateRandomNumericId();
+
+    const tags = [
+        formData.get("tag1")?.toString() ?? "",
+        formData.get("tag2")?.toString() ?? "",
+        formData.get("tag3")?.toString() ?? "",
+        formData.get("tag4")?.toString() ?? "",
+        formData.get("tag5")?.toString() ?? "",
+    ].filter((tag) => tag !== "");
+
+    const job_post = {
+        id,
+        job_title: formData.get("job_title") as string,
+        description: formData.get("description") as string,
+        company_name: formData.get("company_name") as string,
+        apply_link: formData.get("apply_link") as string,
+        location: formData.get("location") as string,
+        salary_min: formData.get("salary_min") as string,
+        salary_max: formData.get("salary_max") as string,
+        tags: tags,
+    };
+    return supabase.from("job_post").insert(job_post);
 }
 
 export async function getJobs() {
