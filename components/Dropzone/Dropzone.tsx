@@ -8,10 +8,12 @@ import Image from "next/image";
 function MyDropZone() {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
+    
+
     const onDrop = useCallback((acceptedFiles: File[]) => {
         // Update the state to the first selected image file
         const file = acceptedFiles[0];
-        if (file.size > 1024 * 64 * 64) {
+        if (file.size > 10000) {
             // 64x64px image in bytes
             console.log("File size is too large");
             return;

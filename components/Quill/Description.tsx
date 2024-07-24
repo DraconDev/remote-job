@@ -1,10 +1,13 @@
 "use client";
 import dynamic from "next/dynamic";
+import { useState } from "react";
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
 
 const QuillEditor = dynamic(() => import("react-quill"), { ssr: false });
 
-export default function Home({ content, setContent }: any) {
+export default function Home() {
+    const [content, setContent] = useState("");
+
     const quillModules = {
         toolbar: [
             [{ header: [1, 2, 3, false] }],
@@ -47,6 +50,7 @@ export default function Home({ content, setContent }: any) {
                 formats={quillFormats}
                 className="w-full h-[90%]  bg-white"
             />
+            <input type="text" value={content} name="description" hidden />
         </div>
     );
 }

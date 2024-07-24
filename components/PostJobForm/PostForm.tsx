@@ -6,8 +6,8 @@ import { useState } from "react";
 import Description from "@/components/Quill/Description";
 import FormElem from "./FormElem";
 import PostJobSection from "./PostJobSection";
-import { Database } from "@/types/supabase";
 import { Button } from "../ui/button";
+import MyDropZone from "../Dropzone/Dropzone";
 import { createJobPost } from "@/utils/supabase/actions";
 
 type Props = {};
@@ -112,41 +112,36 @@ const PostForm = (props: Props) => {
         tag5: { value: "", type: "text", placeholder: "Tag 5" },
     });
 
-    const [description, setDescription] = useState("");
+    // todo: on update schema parse
 
-    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-        // console.log(formData, tags, description);
-        try {
-            schema.parse(formData);
-        } catch (error) {
-            console.log(error);
-            return;
-        }
+    // function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    //     e.preventDefault();
+    //     // console.log(formData, tags, description);
+    //     try {
+    //         schema.parse(formData);
+    //     } catch (error) {
+    //         console.log(error);
+    //         return;
+    //     }
 
-        const jobPost = {
-            job_title: formData.job_title.value,
-            company_name: formData.company_name.value,
-            apply_link: formData.apply_link.value,
-            location: formData.location.value,
-            salary_min: parseInt(formData.salary_min.value),
-            salary_max: parseInt(formData.salary_max.value),
-            tags: Object.values(tags)
-                .filter((tag) => tag.value !== "")
-                .map((tag) => tag.value),
-            description,
-        } as Database["public"]["Tables"]["job_post"]["Insert"];
+    //     const jobPost = {
+    //         job_title: formData.job_title.value,
+    //         company_name: formData.company_name.value,
+    //         apply_link: formData.apply_link.value,
+    //         location: formData.location.value,
+    //         salary_min: parseInt(formData.salary_min.value),
+    //         salary_max: parseInt(formData.salary_max.value),
+    //         tags: Object.values(tags)
+    //             .filter((tag) => tag.value !== "")
+    //             .map((tag) => tag.value),
+    //         description,
+    //     } as Database["public"]["Tables"]["job_post"]["Insert"];
 
-        try {
-            createJobPost(jobPost);
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    // }
 
     return (
         <form
-            onSubmit={handleSubmit}
+            action={createJobPost}
             className="w-full  flex justify-center flex-col gap-3 pt-1 border-2 border-gray-300 rounded-lg p-1 w-max-[700px] m-auto"
         >
             {Object.keys(formData).map((key) => (
@@ -198,7 +193,9 @@ const PostForm = (props: Props) => {
             </PostJobSection>
 
             <PostJobSection title="Description" />
-            <Description content={description} setContent={setDescription} />
+            <Description />
+
+            <MyDropZone />
             <div className="flex justify-end">
                 <Button
                     type="submit"

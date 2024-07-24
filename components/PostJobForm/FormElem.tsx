@@ -17,6 +17,7 @@ const FormElem = (props: Props) => {
                 value={props.value}
                 onChange={props.onChange}
                 className={"p-1"}
+                minLength={3}
             />
         </>
     );
