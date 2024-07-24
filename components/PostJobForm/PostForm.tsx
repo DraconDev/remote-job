@@ -12,15 +12,6 @@ import { createJobPost } from "@/utils/supabase/actions";
 
 type Props = {};
 
-// type FormDataType = {
-//     [key: string]: {
-//         value: string;
-//         type: string;
-//         placeholder: string;
-//         extra?: string;
-//     };
-// };
-
 const schema = z.object({
     job_title: z.object({
         value: z.string().min(3, "Required"),

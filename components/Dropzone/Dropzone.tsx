@@ -41,7 +41,7 @@ function MyDropZone() {
                 {...getRootProps()}
                 className="border-2 border-black w-[64px] h-[64px]  hover:cursor-pointer  rounded-full"
             >
-                <input {...getInputProps()} />
+                <input {...getInputProps()} name="image" />
                 {selectedImage ? (
                     <Image
                         src={selectedImage}
