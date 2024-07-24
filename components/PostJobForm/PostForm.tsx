@@ -9,6 +9,7 @@ import PostJobSection from "./PostJobSection";
 import { Button } from "../ui/button";
 import MyDropZone from "../Dropzone/Dropzone";
 import { createJobPost } from "@/utils/supabase/actions";
+import LogoInput from "../Dropzone/LogoInput";
 
 type Props = {};
 
@@ -191,10 +192,9 @@ const PostForm = (props: Props) => {
                     />
                 ))}
             </PostJobSection>
-
             <PostJobSection title="Description" />
             <Description />
-
+            <LogoInput />
             <MyDropZone />
             <div className="flex justify-end">
                 <Button

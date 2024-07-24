@@ -37,7 +37,7 @@ function MyDropZone() {
     return (
         <>
             <div className="">64x64px large avatar in png or jpeg format</div>
-            <input name="logo" type="file" accept="image/*" />
+
             <div
                 {...getRootProps()}
                 className="border-2 border-black w-[64px] h-[64px]  hover:cursor-pointer  rounded-full"
