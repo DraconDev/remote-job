@@ -49,6 +49,7 @@ type FormDataType = z.infer<typeof schema>;
 // type FormDataType = keyof typeof schema;
 
 const PostForm = (props: Props) => {
+    let [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [formData, setFormData] = useState<FormDataType>({
         job_title: { value: "", type: "text", placeholder: "Job Title" },
         company_name: { value: "", type: "text", placeholder: "Company Name" },
@@ -69,8 +70,6 @@ const PostForm = (props: Props) => {
             placeholder: "Salary Max in USD",
         },
     });
-
-    let [selectedFile, setSelectedFile] = useState<File | null>(null);
 
     const tagSchema = z.object({
         tag1: z.object({
@@ -113,30 +112,6 @@ const PostForm = (props: Props) => {
         tag4: { value: "", type: "text", placeholder: "Tag 4" },
         tag5: { value: "", type: "text", placeholder: "Tag 5" },
     });
-
-    // todo: on update schema parse
-
-    //     const jobPost = {
-    //         job_title: formData.job_title.value,
-    //         company_name: formData.company_name.value,
-    //         apply_link: formData.apply_link.value,
-    //         location: formData.location.value,
-    //         salary_min: parseInt(formData.salary_min.value),
-    //         salary_max: parseInt(formData.salary_max.value),
-    //         tags: Object.values(tags)
-    //             .filter((tag) => tag.value !== "")
-    //             .map((tag) => tag.value),
-    //         description,
-    //     } as Database["public"]["Tables"]["job_post"]["Insert"];
-
-    // }
-
-    // function handleSubmit(formy: FormData) {
-    //     console.log("ASDASDASDASDASD", formy);
-    //     formy.append("logo", selectedFile as File);
-    //     console.log("2", formy);
-    //     createJobPost(formy);
-    // }
 
     const handleSubmit = async (formData: FormData) => {
         if (selectedFile) {
