@@ -9,8 +9,6 @@ import PostJobSection from "./PostJobSection";
 import { Button } from "../ui/button";
 import MyDropZone from "../Dropzone/Dropzone";
 import { createJobPost } from "@/utils/supabase/actions";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 type Props = {};
 
@@ -60,7 +58,7 @@ const PostForm = (props: Props) => {
         company_name: { value: "", type: "text", placeholder: "Company Name" },
         apply_link: {
             value: "",
-            type: "text",
+            type: "email",
             placeholder: "Application Link or Email",
         },
         location: { value: "", type: "text", placeholder: "Location" },
@@ -126,14 +124,6 @@ const PostForm = (props: Props) => {
         await createJobPost(formData);
     };
 
-    const {
-        register,
-        handleSubmit: _handleSubmit,
-        formState: { errors },
-    } = useForm<FormData>({
-        resolver: zodResolver(schema),
-    });
-
     return (
         <form
             action={handleSubmit}
@@ -147,6 +137,7 @@ const PostForm = (props: Props) => {
                     <FormElem
                         key={key}
                         type={formData[key as keyof typeof formData].type}
+                        required={true}
                         name={key}
                         placeholder={
                             formData[key as keyof typeof formData].placeholder

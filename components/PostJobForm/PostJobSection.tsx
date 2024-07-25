@@ -5,10 +5,10 @@ type Props = {
 };
 
 const PostJobSection = (props: Props) => {
-    const buttonStyles = "font-bold py-1 px-2 ";
+    const buttonStyles = "p-1 font-bold";
     const paragraphStyles = "font-bold text-xl border-b-2 border-accent";
     return (
-        <div className={`${buttonStyles} flex flex-col gap-2`}>
+        <div className={`${buttonStyles} flex flex-col gap-1`}>
             <p className={paragraphStyles}>{props.title}</p>
             {props?.children}
         </div>
