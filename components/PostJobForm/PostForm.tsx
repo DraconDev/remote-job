@@ -9,7 +9,6 @@ import PostJobSection from "./PostJobSection";
 import { Button } from "../ui/button";
 import MyDropZone from "../Dropzone/Dropzone";
 import { createJobPost } from "@/utils/supabase/actions";
-import LogoInput from "../Dropzone/LogoInput";
 
 type Props = {};
 
@@ -71,6 +70,8 @@ const PostForm = (props: Props) => {
         },
     });
 
+    let [selectedFile, setSelectedFile] = useState<File | null>(null);
+
     const tagSchema = z.object({
         tag1: z.object({
             value: z.string().min(0, "Required"),
@@ -115,16 +116,6 @@ const PostForm = (props: Props) => {
 
     // todo: on update schema parse
 
-    // function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    //     e.preventDefault();
-    //     // console.log(formData, tags, description);
-    //     try {
-    //         schema.parse(formData);
-    //     } catch (error) {
-    //         console.log(error);
-    //         return;
-    //     }
-
     //     const jobPost = {
     //         job_title: formData.job_title.value,
     //         company_name: formData.company_name.value,
@@ -140,9 +131,16 @@ const PostForm = (props: Props) => {
 
     // }
 
+    function handleSubmit(formy: FormData) {
+        console.log("ASDASDASDASDASD", formy);
+        formy.append("logo", selectedFile as File);
+        console.log("2", formy);
+        createJobPost(formy);
+    }
+
     return (
         <form
-            action={createJobPost}
+            action={handleSubmit}
             className="w-full  flex justify-center flex-col gap-3 pt-1 border-2 border-gray-300 rounded-lg p-1 w-max-[700px] m-auto"
         >
             {Object.keys(formData).map((key) => (
@@ -194,8 +192,8 @@ const PostForm = (props: Props) => {
             </PostJobSection>
             <PostJobSection title="Description" />
             <Description />
-            <LogoInput />
-            <MyDropZone />
+            {/* <LogoInput /> */}
+            <MyDropZone setSelectedFile={setSelectedFile} />
             <div className="flex justify-end">
                 <Button
                     type="submit"

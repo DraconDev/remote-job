@@ -5,17 +5,24 @@ import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import Image from "next/image";
 
-function MyDropZone() {
+function MyDropZone({
+    setSelectedFile,
+}: {
+    setSelectedFile: (file: File | null) => void;
+}) {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
         // Update the state to the first selected image file
+        console.log(acceptedFiles);
         const file = acceptedFiles[0];
         if (file.size > 10000) {
             // 64x64px image in bytes
             console.log("File size is too large");
             return;
         }
+
+        setSelectedFile(file);
         const reader = new FileReader();
 
         reader.onload = (e) => {
@@ -27,7 +34,7 @@ function MyDropZone() {
         reader.readAsDataURL(file);
     }, []);
 
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    const { getRootProps, getInputProps } = useDropzone({
         onDrop,
         accept: {
             "image/jpeg": [],
@@ -42,12 +49,7 @@ function MyDropZone() {
                 {...getRootProps()}
                 className="border-2 border-black w-[64px] h-[64px]  hover:cursor-pointer  rounded-full"
             >
-                <input
-                    {...getInputProps()}
-                    name="logo2"
-                    type="file"
-                    accept="image/*"
-                />
+                <input {...getInputProps()} type="file" accept="image/*" />
                 {selectedImage ? (
                     <Image
                         src={selectedImage}

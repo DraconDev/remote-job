@@ -50,7 +50,13 @@ export default function Home() {
                 formats={quillFormats}
                 className="w-full h-[90%]  bg-white"
             />
-            <input type="text" value={content} name="description" hidden />
+            <input
+                type="text"
+                value={content}
+                name="description"
+                hidden
+                onChange={() => {}}
+            />
         </div>
     );
 }
