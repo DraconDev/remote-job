@@ -9,37 +9,42 @@ import PostJobSection from "./PostJobSection";
 import { Button } from "../ui/button";
 import MyDropZone from "../Dropzone/Dropzone";
 import { createJobPost } from "@/utils/supabase/actions";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 type Props = {};
 
 const schema = z.object({
     job_title: z.object({
-        value: z.string().min(3, "Required"),
+        value: z.string().min(3, "Minimum 3 characters"),
         type: z.string().default("text"),
         placeholder: z.string().default("Job Title"),
     }),
     company_name: z.object({
-        value: z.string().min(3, "Required"),
+        value: z.string().min(3, "Minimum 3 characters"),
         type: z.string().default("text"),
         placeholder: z.string().default("Company Name"),
     }),
     apply_link: z.object({
-        value: z.string().min(3, "Required"),
+        value: z
+            .string()
+            .email("Must be a valid email")
+            .min(3, "Minimum 3 characters"),
         type: z.string().default("text"),
         placeholder: z.string().default("Application Link or Email"),
     }),
     location: z.object({
-        value: z.string().min(3, "Required"),
+        value: z.string().min(3, "Minimum 3 characters"),
         type: z.string().default("text"),
         placeholder: z.string().default("Location"),
     }),
     salary_min: z.object({
-        value: z.string().min(1, "Required"),
+        value: z.string().min(3, "Minimum 3 characters"),
         type: z.string().default("number"),
         placeholder: z.string().default("Salary Min"),
     }),
     salary_max: z.object({
-        value: z.string().min(1, "Required"),
+        value: z.string().min(3, "Minimum 3 characters"),
         type: z.string().default("number"),
         placeholder: z.string().default("Salary Max"),
     }),
@@ -120,6 +125,14 @@ const PostForm = (props: Props) => {
         console.log("2", formData);
         await createJobPost(formData);
     };
+
+    const {
+        register,
+        handleSubmit: _handleSubmit,
+        formState: { errors },
+    } = useForm<FormData>({
+        resolver: zodResolver(schema),
+    });
 
     return (
         <form
