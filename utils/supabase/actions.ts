@@ -49,6 +49,16 @@ export async function getJobs() {
     return jobPost as Database["public"]["Tables"]["job_post"]["Row"][];
 }
 
+// get public url of image
+export async function getPublicUrl(path: string) {
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+    const { data } = await supabase.storage
+        .from("remoteworknexus")
+        .getPublicUrl(path);
+    return data.publicUrl;
+}
+
 export async function uploadLogo(logo: File) {
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);

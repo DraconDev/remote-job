@@ -1,7 +1,8 @@
 import { Database } from "@/types/supabase";
+import { getPublicUrl } from "@/utils/supabase/actions";
 import Link from "next/link";
 
-function JobCard(card: Database["public"]["Tables"]["job_post"]["Row"]) {
+async function JobCard(card: Database["public"]["Tables"]["job_post"]["Row"]) {
     const boxes = [
         card.location,
         `$${card.salary_min}-$${card.salary_max}`,
@@ -9,6 +10,7 @@ function JobCard(card: Database["public"]["Tables"]["job_post"]["Row"]) {
     ].filter(
         (item) => Boolean(item) && (!Array.isArray(item) || item.length > 0)
     );
+    const url = await getPublicUrl(card.logo_path);
     return (
         <Link
             className="w-full h-[110px] border-2 p-2  rounded-md border-gray-300 flex justify-between items-center "
