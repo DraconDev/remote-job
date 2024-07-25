@@ -179,7 +179,7 @@ const PostForm = (props: Props) => {
             </PostJobSection>
             <PostJobSection title="Description" />
             <Description />
-            {/* <LogoInput /> */}
+     
             <MyDropZone setSelectedFile={setSelectedFile} />
             <div className="flex justify-end">
                 <Button
