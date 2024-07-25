@@ -117,10 +117,21 @@ const PostForm = (props: Props) => {
     });
 
     const handleSubmit = async (formData: FormData) => {
+        // parse schema
+
+        try {
+            const validatedData = schema.parse(formData);
+        } catch (error) {
+            if (error instanceof z.ZodError) {
+                // Handle Zod validation errors
+                console.log("Validation failed:", error.errors);
+                return;
+            }
+        }
+
         if (selectedFile) {
             formData.append("logo", selectedFile);
         }
-        console.log("2", formData);
         await createJobPost(formData);
     };
 
@@ -179,7 +190,7 @@ const PostForm = (props: Props) => {
             </PostJobSection>
             <PostJobSection title="Description" />
             <Description />
-     
+
             <MyDropZone setSelectedFile={setSelectedFile} />
             <div className="flex justify-end">
                 <Button
