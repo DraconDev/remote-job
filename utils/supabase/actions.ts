@@ -31,7 +31,13 @@ export async function createJobPost(formData: FormData) {
         tags: tags,
         logo_path: logo_url,
     };
-    supabase.from("job_post").insert(job_post);
+    const { data, error } = await supabase.from("job_post").insert(job_post);
+
+    if (error) {
+        console.log(error);
+        return error;
+    }
+    return data;
 }
 
 export async function getJobs() {

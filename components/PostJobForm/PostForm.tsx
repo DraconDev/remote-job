@@ -131,12 +131,20 @@ const PostForm = (props: Props) => {
 
     // }
 
-    function handleSubmit(formy: FormData) {
-        console.log("ASDASDASDASDASD", formy);
-        formy.append("logo", selectedFile as File);
-        console.log("2", formy);
-        createJobPost(formy);
-    }
+    // function handleSubmit(formy: FormData) {
+    //     console.log("ASDASDASDASDASD", formy);
+    //     formy.append("logo", selectedFile as File);
+    //     console.log("2", formy);
+    //     createJobPost(formy);
+    // }
+
+    const handleSubmit = async (formData: FormData) => {
+        if (selectedFile) {
+            formData.append("logo", selectedFile);
+        }
+        console.log("2", formData);
+        await createJobPost(formData);
+    };
 
     return (
         <form
