@@ -1,4 +1,3 @@
-"use client";
 import { Database } from "@/types/supabase";
 import JobCard from "./JobCard";
 
@@ -7,7 +6,6 @@ type Props = {
 };
 
 const JobCards = (props: Props) => {
-    console.log(props);
     return (
         <div className="flex flex-col gap-4">
             {/* {props.data && JSON.stringify(props.data)} */}
