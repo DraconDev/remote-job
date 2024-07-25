@@ -54,8 +54,8 @@ type FormDataType = z.infer<typeof schema>;
 const PostForm = (props: Props) => {
     let [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [formData, setFormData] = useState<FormDataType>({
-        job_title: { value: "", type: "text", placeholder: "Job Title" },
-        company_name: { value: "", type: "text", placeholder: "Company Name" },
+        job_title: { value: "", type: "text", placeholder: "Job Title"  },
+        company_name: { value: "", type: "text", placeholder: "Company Name"  },
         apply_link: {
             value: "",
             type: "email",
