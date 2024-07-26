@@ -22,8 +22,8 @@ const FormElem = (props: Props) => {
                 className={"p-1"}
                 minLength={3}
             />
-            {props.required && props.value.length < 3 && (
-                <p className="text-sm text-red-500 p-1">Minimum 3 characters</p>
+            {props.required && props.value.length < 5 && (
+                <p className="text-sm text-red-500 p-1">Minimum 5 characters</p>
             )}
         </>
     );

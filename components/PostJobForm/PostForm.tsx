@@ -1,8 +1,6 @@
 "use client";
 import { z } from "zod";
-
 import { useState } from "react";
-
 import Description from "@/components/Quill/Description";
 import FormElem from "./FormElem";
 import PostJobSection from "./PostJobSection";
@@ -14,98 +12,86 @@ type Props = {};
 
 const schema = z.object({
     job_title: z.object({
-        value: z.string().min(3, "Minimum 3 characters"),
+        value: z.string().min(3, "Minimum 3 characters").optional(),
         type: z.string().default("text"),
         placeholder: z.string().default("Job Title"),
+        required: z.boolean().default(true),
     }),
     company_name: z.object({
-        value: z.string().min(3, "Minimum 3 characters"),
+        value: z.string().min(3, "Minimum 3 characters").optional(),
         type: z.string().default("text"),
         placeholder: z.string().default("Company Name"),
+        required: z.boolean().default(true),
     }),
     apply_link: z.object({
-        value: z.string().min(3, "Minimum 3 characters"),
+        value: z.string().min(3, "Minimum 3 characters").optional(),
         type: z.string().default("text"),
         placeholder: z.string().default("Application Link or Email"),
+        required: z.boolean().default(true),
     }),
     location: z.object({
-        value: z.string().min(3, "Minimum 3 characters"),
+        value: z.string().min(3, "Minimum 3 characters").optional(),
         type: z.string().default("text"),
         placeholder: z.string().default("Location"),
+        required: z.boolean().default(true),
     }),
     salary_min: z.object({
-        value: z.string().min(3, "Minimum 3 characters"),
+        value: z.string().min(0, "Minimum 3 characters").optional(),
         type: z.string().default("number"),
         placeholder: z.string().default("Salary Min"),
+        required: z.boolean().default(false),
     }),
     salary_max: z.object({
-        value: z.string().min(3, "Minimum 3 characters"),
+        value: z.string().min(0, "Minimum 3 characters").optional(),
         type: z.string().default("number"),
         placeholder: z.string().default("Salary Max"),
+        required: z.boolean().default(false),
     }),
 });
 
 type FormDataType = z.infer<typeof schema>;
-// type FormDataType = keyof typeof schema;
 
 const PostForm = (props: Props) => {
-    let [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [formData, setFormData] = useState<FormDataType>({
-        job_title: { value: "", type: "text", placeholder: "Job Title" },
-        company_name: { value: "", type: "text", placeholder: "Company Name" },
+        job_title: {
+            value: "",
+            type: "text",
+            placeholder: "Job Title",
+            required: true,
+        },
+        company_name: {
+            value: "",
+            type: "text",
+            placeholder: "Company Name",
+            required: true,
+        },
         apply_link: {
             value: "",
             type: "text",
             placeholder: "Application Link or Email",
+            required: true,
         },
-        location: { value: "", type: "text", placeholder: "Location" },
+        location: {
+            value: "",
+            type: "text",
+            placeholder: "Location",
+            required: true,
+        },
         salary_min: {
             value: "",
             type: "number",
-            placeholder: "Salary Min in USD",
+            placeholder: "Salary Min",
+            required: false,
         },
         salary_max: {
             value: "",
             type: "number",
-            placeholder: "Salary Max in USD",
+            placeholder: "Salary Max",
+            required: false,
         },
     });
 
-    const tagSchema = z.object({
-        tag1: z.object({
-            value: z.string().min(0, "Required"),
-            type: z.string().default("text"),
-            placeholder: z.string().default("Tag 1"),
-        }),
-
-        tag2: z.object({
-            value: z.string().min(0, "Required"),
-            type: z.string().default("text"),
-            placeholder: z.string().default("Tag 2"),
-        }),
-
-        tag3: z.object({
-            value: z.string().min(0, "Required"),
-            type: z.string().default("text"),
-            placeholder: z.string().default("Tag 3"),
-        }),
-
-        tag4: z.object({
-            value: z.string().min(0, "Required"),
-            type: z.string().default("text"),
-            placeholder: z.string().default("Tag 4"),
-        }),
-
-        tag5: z.object({
-            value: z.string().min(0, "Required"),
-            type: z.string().default("text"),
-            placeholder: z.string().default("Tag 5"),
-        }),
-    });
-
-    type TagSchema = z.infer<typeof tagSchema>;
-
-    const [tags, setTags] = useState<TagSchema>({
+    const [tags, setTags] = useState({
         tag1: { value: "", type: "text", placeholder: "Tag 1" },
         tag2: { value: "", type: "text", placeholder: "Tag 2" },
         tag3: { value: "", type: "text", placeholder: "Tag 3" },
@@ -113,22 +99,11 @@ const PostForm = (props: Props) => {
         tag5: { value: "", type: "text", placeholder: "Tag 5" },
     });
 
-    const handleSubmit = async (formData: FormData) => {
-        // // parse schema
-        // console.log("formData", Object.fromEntries(formData));
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-        // try {
-        //     const partialValidatedData = schema
-        //         .partial()
-        //         .parse(Object.fromEntries(formData));
-        // } catch (error) {
-        //     if (error instanceof z.ZodError) {
-        //         // Handle Zod validation errors
-        //         console.log("Validation failed:", error.errors);
-        //         return;
-        //     }
-        // }
-
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
         if (selectedFile) {
             formData.append("logo", selectedFile);
         }
@@ -137,7 +112,7 @@ const PostForm = (props: Props) => {
 
     return (
         <form
-            action={handleSubmit}
+            onSubmit={handleSubmit}
             className="w-full  flex justify-center flex-col gap-3 pt-1 border-2 border-gray-300 rounded-lg p-1 w-max-[700px] m-auto"
         >
             {Object.keys(formData).map((key) => (
@@ -148,7 +123,6 @@ const PostForm = (props: Props) => {
                     <FormElem
                         key={key}
                         type={formData[key as keyof typeof formData].type}
-                        required={true}
                         name={key}
                         placeholder={
                             formData[key as keyof typeof formData].placeholder
@@ -165,6 +139,9 @@ const PostForm = (props: Props) => {
                                 },
                             }));
                         }}
+                        required={
+                            formData[key as keyof typeof formData].required
+                        }
                     />
                 </PostJobSection>
             ))}
