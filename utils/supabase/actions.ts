@@ -47,7 +47,10 @@ export async function createJobPost(formData: FormData) {
 export async function getJobs() {
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
-    const { data: jobPost } = await supabase.from("job_post").select();
+    const { data: jobPost } = await supabase
+        .from("job_post")
+        .select()
+        .order("created_at", { ascending: false });
     console.log(jobPost, "jobPost");
 
     return jobPost as Database["public"]["Tables"]["job_post"]["Row"][];
