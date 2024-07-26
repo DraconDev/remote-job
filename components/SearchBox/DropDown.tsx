@@ -1,3 +1,6 @@
+"use client";
+import { useState } from "react";
+
 interface DropDownProps {
     items: string[];
     selectedItem: string;
@@ -9,6 +12,8 @@ export default function DropDown({
     selectedItem,
     onSelect,
 }: DropDownProps) {
+    const [dropdownState, setDropdownState] = useState(false);
+
     return (
         <div className="relative">
             <select

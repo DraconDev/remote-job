@@ -1,4 +1,4 @@
-import DropDown from "./DropDown";
+import ListBoxCustom from "./Dropdown2";
 
 type Props = {
     lists: {
@@ -12,7 +12,7 @@ const Dropdowns = ({ lists }: Props) => {
     return (
         <div className="gap-2 flex p-2">
             {lists.map((list) => (
-                <DropDown
+                <ListBoxCustom
                     key={list.current}
                     items={list.list}
                     selectedItem={list.current}
