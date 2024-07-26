@@ -2,7 +2,7 @@
 import { countries, experiences, jobTypes } from "@/consts/info";
 import { useState } from "react";
 import Dropdowns from "./Dropdowns";
-
+import { Input } from "@nextui-org/input";
 type Props = {};
 
 const SearchBox = (props: Props) => {
@@ -30,9 +30,14 @@ const SearchBox = (props: Props) => {
     ];
 
     return (
-        <div className="w-full px-3 py-1">
+        <div className="w-full px-3 py-1 bg-muted">
             <h1>Remote Jobs</h1>
             <div className="w-full">
+                <Input
+                    type="text"
+                    label="Search"
+                    className="border-2 border-black rounded-2xl"
+                />
                 <div className="flex flex-row gap-4">
                     <div className="flex flex-col">
                         <label htmlFor="title">Title or Skill</label>

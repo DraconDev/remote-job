@@ -776,7 +776,7 @@
     "@nextui-org/shared-utils" "2.0.7"
     "@nextui-org/use-image" "2.0.6"
 
-"@nextui-org/input@2.2.4":
+"@nextui-org/input@^2.2.4", "@nextui-org/input@2.2.4":
   version "2.2.4"
   resolved "https://registry.npmjs.org/@nextui-org/input/-/input-2.2.4.tgz"
   integrity sha512-CVeTwwUJn9pEJC+kq3Jg0nAFeYVGBbIU7U2YFSG8XJK2X75odj8RSQdVd3Dt2U/b5Mtwt5sBh9gMzCedtjffWg==
