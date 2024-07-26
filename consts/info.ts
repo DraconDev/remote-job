@@ -212,6 +212,7 @@ export const countries = [
 ];
 
 export const experiences = [
+    "Any experience",
     "Internship",
     "Entry level",
     "Associate",
@@ -221,6 +222,7 @@ export const experiences = [
 ];
 
 export const jobTypes = [
+    "Any type",
     "Full Time",
     "Part Time",
     "Contractor",
