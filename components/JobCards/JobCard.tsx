@@ -24,7 +24,7 @@ async function JobCard(card: Database["public"]["Tables"]["job_post"]["Row"]) {
                 <Image src={url} alt="" width="64" height="64" />
             ) : (
                 <div className="w-16 h-16 justify-center items-center flex ">
-                    <p className="text-5xl">
+                    <p className="text-4xl">
                         {card.company_name
                             ? card.company_name[0].toUpperCase()
                             : "J"}
