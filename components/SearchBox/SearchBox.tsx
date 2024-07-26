@@ -1,8 +1,34 @@
-import { countries, experiences, jobTypes, regions } from "@/consts/info";
+"use client";
+import { countries, experiences, jobTypes } from "@/consts/info";
+import { useState } from "react";
+import Dropdowns from "./Dropdowns";
 
 type Props = {};
 
 const SearchBox = (props: Props) => {
+    const [title, setTitle] = useState("");
+    const [location, setLocation] = useState(countries[0]);
+    const [jobType, setJobType] = useState(jobTypes[0]);
+    const [experience, setExperience] = useState(experiences[0]);
+
+    const menus = [
+        {
+            list: countries,
+            current: location,
+            setCurrent: setLocation,
+        },
+        {
+            list: experiences,
+            current: experience,
+            setCurrent: setExperience,
+        },
+        {
+            list: jobTypes,
+            current: jobType,
+            setCurrent: setJobType,
+        },
+    ];
+
     return (
         <div className="w-full px-3 py-1">
             <h1>Remote Jobs</h1>
@@ -10,66 +36,16 @@ const SearchBox = (props: Props) => {
                 <div className="flex flex-row gap-4">
                     <div className="flex flex-col">
                         <label htmlFor="title">Title or Skill</label>
-                        <input type="text" id="title" />
-                    </div>
-                    <div className="flex flex-col">
-                        <label htmlFor="location">Location</label>
-                        <select id="location">
-                            <option value="">Select location</option>
-                            {[...regions, ...countries].map((location) => (
-                                <option key={location} value={location}>
-                                    {location}
-                                </option>
-                            ))}
-                        </select>
+                        <input
+                            type="text"
+                            id="title"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            className="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        />
                     </div>
                 </div>
-                <div className="flex flex-row gap-4">
-                    <div className="flex flex-col">
-                        <label htmlFor="jobType">Job Type</label>
-                        <select id="jobType">
-                            <option value="">Select Job Type</option>
-                            {jobTypes.map((jobType) => (
-                                <option key={jobType} value={jobType}>
-                                    {jobType}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <div className="flex flex-col">
-                        <label htmlFor="experience">Experience</label>
-                        <select id="experience">
-                            <option value="">Select Experience</option>
-                            {experiences.map((experience) => (
-                                <option key={experience} value={experience}>
-                                    {experience}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    {/* <div className="flex flex-col">
-                        <label htmlFor="salary">Salary</label>
-                        <select id="salary">
-                            <option value="">Select Salary</option>
-                            {salaries.map((salary) => (
-                                <option key={salary} value={salary}>
-                                    {salary}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <div className="flex flex-col">
-                        <label htmlFor="role">Role</label>
-                        <select id="role">
-                            <option value="">Select Role</option>
-                            {roles.map((role) => (
-                                <option key={role} value={role}>
-                                    {role}
-                                </option>
-                            ))}
-                        </select>
-                    </div> */}
-                </div>
+                <Dropdowns lists={menus} />
             </div>
         </div>
     );

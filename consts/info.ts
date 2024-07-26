@@ -1,4 +1,13 @@
-export const regions = [
+// export const regions = [
+//     "Anywhere",
+//     "Asia",
+//     "Europe",
+//     "Africa",
+//     "North America",
+//     "South America",
+//     "Oceania",
+// ];
+export const countries = [
     "Anywhere",
     "Asia",
     "Europe",
@@ -6,8 +15,6 @@ export const regions = [
     "North America",
     "South America",
     "Oceania",
-];
-export const countries = [
     "Afghanistan",
     "Albania",
     "Algeria",
