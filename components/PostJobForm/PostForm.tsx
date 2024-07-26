@@ -24,10 +24,7 @@ const schema = z.object({
         placeholder: z.string().default("Company Name"),
     }),
     apply_link: z.object({
-        value: z
-            .string()
-            .email("Must be a valid email")
-            .min(3, "Minimum 3 characters"),
+        value: z.string().min(3, "Minimum 3 characters"),
         type: z.string().default("text"),
         placeholder: z.string().default("Application Link or Email"),
     }),
@@ -54,11 +51,11 @@ type FormDataType = z.infer<typeof schema>;
 const PostForm = (props: Props) => {
     let [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [formData, setFormData] = useState<FormDataType>({
-        job_title: { value: "", type: "text", placeholder: "Job Title"  },
-        company_name: { value: "", type: "text", placeholder: "Company Name"  },
+        job_title: { value: "", type: "text", placeholder: "Job Title" },
+        company_name: { value: "", type: "text", placeholder: "Company Name" },
         apply_link: {
             value: "",
-            type: "email",
+            type: "text",
             placeholder: "Application Link or Email",
         },
         location: { value: "", type: "text", placeholder: "Location" },
@@ -117,17 +114,20 @@ const PostForm = (props: Props) => {
     });
 
     const handleSubmit = async (formData: FormData) => {
-        // parse schema
+        // // parse schema
+        // console.log("formData", Object.fromEntries(formData));
 
-        try {
-            const validatedData = schema.parse(formData);
-        } catch (error) {
-            if (error instanceof z.ZodError) {
-                // Handle Zod validation errors
-                console.log("Validation failed:", error.errors);
-                return;
-            }
-        }
+        // try {
+        //     const partialValidatedData = schema
+        //         .partial()
+        //         .parse(Object.fromEntries(formData));
+        // } catch (error) {
+        //     if (error instanceof z.ZodError) {
+        //         // Handle Zod validation errors
+        //         console.log("Validation failed:", error.errors);
+        //         return;
+        //     }
+        // }
 
         if (selectedFile) {
             formData.append("logo", selectedFile);

@@ -14,6 +14,7 @@ async function JobCard(card: Database["public"]["Tables"]["job_post"]["Row"]) {
     const url = await getPublicUrl(card.logo_path ?? "");
 
     console.log(card);
+
     return (
         <Link
             className="w-full h-[110px] border-2 p-2  rounded-md border-gray-300 flex justify-between items-center gap-2"
@@ -46,7 +47,22 @@ async function JobCard(card: Database["public"]["Tables"]["job_post"]["Row"]) {
                 </div>
             </div>
             <div className="flex place-items-start justify-end h-full">
-                <p className="flex shrink-0">{card.created_at.slice(0, 10)}</p>
+                {/* current date - created at  */}
+                {(() => {
+                    const now = Date.now();
+                    const createdAt = new Date(card.created_at).getTime();
+                    const diffInMs = now - createdAt;
+                    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+
+                    if (diffInDays >= 1) {
+                        return `${Math.floor(diffInDays)} days ago`;
+                    } else {
+                        const diffInHours = diffInMs / (1000 * 60 * 60);
+                        return `${Math.floor(diffInHours)} hours ago`;
+                    }
+                })()}
+                {/* <div className=""> asd </div>
+                <p className="flex shrink-0">{card.created_at.slice(0, 10)}</p> */}
             </div>
         </Link>
     );

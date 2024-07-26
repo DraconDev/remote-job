@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Database } from "@/types/supabase";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 
 export async function createJobPost(formData: FormData) {
     console.log(formData);
@@ -37,6 +38,9 @@ export async function createJobPost(formData: FormData) {
         console.log(error);
         return error;
     }
+    // revalidate root page
+    revalidatePath("/");
+
     return data;
 }
 
