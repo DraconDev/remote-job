@@ -1,5 +1,6 @@
 "use client";
 
+import Dropdown3 from "@/components/SearchBox/Dropdown3";
 import { useState } from "react";
 
 type Props = {};
@@ -11,6 +12,7 @@ const Page = (props: Props) => {
         <div>
             {/* <button onClick={() => sendEmail()}>Send Email</button> */}
             {/* <Example /> */}
+            <Dropdown3 />
         </div>
     );
 };
