@@ -7,9 +7,11 @@ type Props = {
         current: string;
         setCurrent: (value: string) => void;
     }[];
+    salary: number;
+    setSalary: (value: number) => void;
 };
 
-const Dropdowns = ({ lists }: Props) => {
+const Dropdowns = ({ lists, salary, setSalary }: Props) => {
     return (
         <div className="flex flex-col">
             <div className="gap-2 flex py-2">
@@ -31,6 +33,8 @@ const Dropdowns = ({ lists }: Props) => {
                         className="max-w-[200px] flex justify-between "
                         id="min-salary"
                         type="number"
+                        value={salary > 0 ? salary : ""}
+                        onChange={(e) => setSalary(Number(e.target.value))}
                         name="salary_minimum"
                         placeholder="Minimum salary in USD"
                     />

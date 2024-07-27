@@ -141,6 +141,16 @@ export async function getJobById(id: string) {
     return jobPost as Database["public"]["Tables"]["job_post"]["Row"];
 }
 
+export async function searchJobs(searchTerm: string) {
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+    const { data: jobPost } = await supabase
+        .from("job_post")
+        .select()
+        .ilike("job_title", `%${searchTerm}%`);
+    return jobPost;
+}
+
 // export async function createInvoice(formData: FormData) {
 //     "use server";
 

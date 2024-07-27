@@ -3,7 +3,6 @@ import { countries, experiences, jobTypes } from "@/consts/info";
 import { useState } from "react";
 import Dropdowns from "./Dropdowns";
 import { InputWithButton } from "./InputWithButton";
-import SelectMultiple from "./SelectMultiple";
 type Props = {};
 
 const SearchBox = (props: Props) => {
@@ -11,6 +10,7 @@ const SearchBox = (props: Props) => {
     const [location, setLocation] = useState(countries[0]);
     const [jobType, setJobType] = useState(jobTypes[0]);
     const [experience, setExperience] = useState(experiences[0]);
+    const [salary, setSalary] = useState(0);
 
     const menus = [
         {
@@ -38,9 +38,12 @@ const SearchBox = (props: Props) => {
                     searchField={searchField}
                     setSearchField={setSearchField}
                 />
-                <Dropdowns lists={menus} />
+                <Dropdowns
+                    lists={menus}
+                    salary={salary}
+                    setSalary={setSalary}
+                />
             </div>
-
         </div>
     );
 };
