@@ -115,6 +115,9 @@ const PostForm = (props: Props) => {
             onSubmit={handleSubmit}
             className="w-full  flex justify-center flex-col gap-3 pt-1 border-2 border-gray-300 rounded-lg p-1 w-max-[700px] m-auto"
         >
+            <h1 className="text-3xl w-full justify-center text-center">
+                Job details
+            </h1>
             {Object.keys(formData).map((key) => (
                 <PostJobSection
                     key={key}
