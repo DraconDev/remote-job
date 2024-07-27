@@ -18,7 +18,7 @@ async function JobCard(card: JobPostWithCompanies) {
 
     return (
         <Link
-            className="w-full h-[110px] border-2 p-2  rounded-md border-gray-300 flex justify-between items-center gap-2"
+            className="w-full h-[110px]  p-2  rounded-md border-card-foreground flex justify-between items-center gap-2 bg-card"
             id=""
             href={`/job/${card.id}`}
         >

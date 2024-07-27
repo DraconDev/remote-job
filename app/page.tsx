@@ -3,7 +3,7 @@ import SearchBox from "@/components/SearchBox/SearchBox";
 
 export default function Home() {
     return (
-        <main className=" w-full p-2">
+        <main className="flex flex-col w-full gap-3">
             <SearchBox />
             <JobContainer />
         </main>

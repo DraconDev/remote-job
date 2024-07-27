@@ -30,29 +30,30 @@ const SearchBox = (props: Props) => {
     ];
 
     return (
-        <div className="w-full p-2 bg-card border rounded-lg">
-            <h1>Remote Jobs</h1>
-            <div className="w-full">
-                <Input
-                    type="text"
-                    label="Search"
-                    className="border-2 border-black rounded-2xl"
-                />
-                <div className="flex flex-row gap-4">
-                    <div className="flex flex-col">
-                        <label htmlFor="title">Title or Skill</label>
-                        <input
-                            type="text"
-                            id="title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                            className="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                        />
+
+            <div className="w-full p-2 bg-card border rounded-lg">
+                <h1>Remote Jobs</h1>
+                <div className="w-full">
+                    <Input
+                        type="text"
+                        label="Search"
+                        className="border-2 border-black rounded-2xl"
+                    />
+                    <div className="flex flex-row gap-4">
+                        <div className="flex flex-col">
+                            <label htmlFor="title">Title or Skill</label>
+                            <input
+                                type="text"
+                                id="title"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                                className="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            />
+                        </div>
                     </div>
+                    <Dropdowns lists={menus} />
                 </div>
-                <Dropdowns lists={menus} />
             </div>
-        </div>
     );
 };
 
