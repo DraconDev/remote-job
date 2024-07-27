@@ -88,16 +88,18 @@ export async function createCompany(formData: FormData) {
     return data[0].id;
 }
 
-export async function getJobs() {
+export async function getJobs(companyId?: string) {
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
     const { data: jobPost } = await supabase
         .from("job_post")
-        .select()
+        .select(
+            `*
+            ,companies: company_id(*)`
+        )
         .order("created_at", { ascending: false });
-    console.log(jobPost, "jobPost");
 
-    return jobPost as Database["public"]["Tables"]["job_post"]["Row"][];
+    return jobPost;
 }
 
 // get public url of image
