@@ -1,31 +1,36 @@
+import { Database } from "@/types/supabase";
 import MyDropZone from "../Dropzone/Dropzone";
 
 type Props = {
     setSelectedFile: (file: File | null) => void;
 };
 
-type company_field = {
-    name: string;
-    email: string;
-    website?: string;
-    description?: string;
-    logo_url?: string;
-    billing_email?: string;
-};
+type PartialCompany = Partial<Database["public"]["Tables"]["companies"]["Row"]>;
 
-const company: company_field = {
-    name: "",
-    website: "",
-    email: "",
-    description: "",
-    logo_url: "",
-    billing_email: "",
+const company: PartialCompany = {
+    name: "Name",
+    website: "Website",
+    email: "Email",
+    description: "Description",
+    billing_email: "Billing Email",
 };
 
 const FormCompanySection = ({ setSelectedFile }: Props) => {
     return (
         <div>
             <h1 className="text-xl">Company</h1>
+            {Object.entries(company).map(([key, value]) => (
+                <input
+                    key={key}
+                    name={key}
+                    type="text"
+                    placeholder={value ? value.toString() : ""}
+                    // value={(company as any)[key]}
+                    // onChange={(e) => {
+                    //     (company as any)[key] = e.target.value;
+                    // }}
+                />
+            ))}
             <MyDropZone setSelectedFile={setSelectedFile} />
         </div>
     );
