@@ -20,7 +20,7 @@ export default function DropDownShad({
 }: DropDownProps) {
     return (
         <Select>
-            <SelectTrigger className="w-[180px] p-3">
+            <SelectTrigger className="w-[180px] p-4">
                 <SelectValue placeholder={selectedItem} />
             </SelectTrigger>
             <SelectContent>

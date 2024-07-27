@@ -1,17 +1,18 @@
+import Input from "../ui/input";
 import DropDownShad from "./DropDownShad";
 
 type Props = {
     lists: {
         list: string[];
         current: string;
-        setCurrent: any;
+        setCurrent: (value: string) => void;
     }[];
 };
 
 const Dropdowns = ({ lists }: Props) => {
     return (
         <div className="flex flex-col">
-            <div className="gap-2 flex p-2">
+            <div className="gap-2 flex py-2">
                 {lists.map((list) => (
                     <DropDownShad
                         key={list.current}
@@ -20,6 +21,15 @@ const Dropdowns = ({ lists }: Props) => {
                         onSelect={list.setCurrent}
                     />
                 ))}
+                <div className="grid w-full max-w-sm items-center ">
+                    <Input
+                        className="max-w-[200px] flex justify-between "
+                        id="min-salary"
+                        type="number"
+                        name="salary_minimum"
+                        placeholder="Minimum salary in USD"
+                    />
+                </div>
             </div>
         </div>
     );
