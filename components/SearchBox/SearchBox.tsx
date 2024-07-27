@@ -3,6 +3,7 @@ import { countries, experiences, jobTypes } from "@/consts/info";
 import { useState } from "react";
 import Dropdowns from "./Dropdowns";
 import { InputWithButton } from "./InputWithButton";
+import SelectMultiple from "./SelectMultiple";
 type Props = {};
 
 const SearchBox = (props: Props) => {
@@ -39,6 +40,7 @@ const SearchBox = (props: Props) => {
                 />
                 <Dropdowns lists={menus} />
             </div>
+
         </div>
     );
 };

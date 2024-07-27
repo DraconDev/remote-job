@@ -21,6 +21,11 @@ const Dropdowns = ({ lists }: Props) => {
                         onSelect={list.setCurrent}
                     />
                 ))}
+                {/* <SelectMultiple
+                    items={lists[1].list}
+                    selectedItem={lists[1].current}
+                    onSelect={lists[1].setCurrent}
+                /> */}
                 <div className="grid w-full max-w-sm items-center ">
                     <Input
                         className="max-w-[200px] flex justify-between "
