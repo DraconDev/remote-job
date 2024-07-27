@@ -141,13 +141,13 @@ export async function getJobById(id: string) {
     return jobPost as Database["public"]["Tables"]["job_post"]["Row"];
 }
 
-export async function searchJobs(searchTerm: string) {
+export async function searchJobs(searchField: string, location: string, jobType: string, experience: string, salary: number) {
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
     const { data: jobPost } = await supabase
         .from("job_post")
         .select()
-        .ilike("job_title", `%${searchTerm}%`);
+        .ilike("job_title", `%${searchField}%`);
     return jobPost;
 }
 
