@@ -3,6 +3,7 @@ import { countries, experiences, jobTypes } from "@/consts/info";
 import { useState } from "react";
 import Dropdowns from "./Dropdowns";
 import { InputWithButton } from "./InputWithButton";
+import console from "console";
 type Props = {};
 
 const SearchBox = (props: Props) => {
@@ -30,21 +31,36 @@ const SearchBox = (props: Props) => {
         },
     ];
 
+    function handleAction() {
+        // new formdata
+        const formData = new FormData();
+        formData.append("search_field", searchField);
+        formData.append("location", location);
+        formData.append("job_type", jobType);
+        formData.append("experience", experience);
+        formData.append("salary", salary.toString());
+
+        console.log(formData);
+        console.log("submitted");
+    }
+
     return (
-        <div className="w-full p-2 bg-card border rounded-lg gap-2">
-            <h1>Remote Jobs</h1>
-            <div className="w-full">
-                <InputWithButton
-                    searchField={searchField}
-                    setSearchField={setSearchField}
-                />
-                <Dropdowns
-                    lists={menus}
-                    salary={salary}
-                    setSalary={setSalary}
-                />
+        <form action={handleAction}>
+            <div className="w-full p-2 bg-card border rounded-lg gap-2">
+                <h1>Remote Jobs</h1>
+                <div className="w-full">
+                    <InputWithButton
+                        searchField={searchField}
+                        setSearchField={setSearchField}
+                    />
+                    <Dropdowns
+                        lists={menus}
+                        salary={salary}
+                        setSalary={setSalary}
+                    />
+                </div>
             </div>
-        </div>
+        </form>
     );
 };
 
