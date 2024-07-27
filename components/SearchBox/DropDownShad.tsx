@@ -3,25 +3,37 @@ import {
     SelectContent,
     SelectGroup,
     SelectItem,
-    SelectLabel,
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
 
-export function DropDownShad() {
+interface DropDownProps {
+    items: string[];
+    selectedItem: string;
+    onSelect: (value: string) => void;
+}
+
+export default function DropDownShad({
+    items,
+    selectedItem,
+    onSelect,
+}: DropDownProps) {
     return (
         <Select>
-            <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select a fruit" />
+            <SelectTrigger className="w-[180px] p-3">
+                <SelectValue placeholder={selectedItem} />
             </SelectTrigger>
             <SelectContent>
                 <SelectGroup>
-                    <SelectLabel>Fruits</SelectLabel>
-                    <SelectItem value="apple">Apple</SelectItem>
-                    <SelectItem value="banana">Banana</SelectItem>
-                    <SelectItem value="blueberry">Blueberry</SelectItem>
-                    <SelectItem value="grapes">Grapes</SelectItem>
-                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                    {items.map((item) => (
+                        <SelectItem
+                            key={item}
+                            value={item}
+                            onClick={() => onSelect(item)}
+                        >
+                            {item}
+                        </SelectItem>
+                    ))}
                 </SelectGroup>
             </SelectContent>
         </Select>

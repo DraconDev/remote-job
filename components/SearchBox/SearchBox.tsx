@@ -30,7 +30,7 @@ const SearchBox = (props: Props) => {
     ];
 
     return (
-        <div className="w-full px-3 py-1 bg-muted">
+        <div className="w-full p-2 bg-card border rounded-lg">
             <h1>Remote Jobs</h1>
             <div className="w-full">
                 <Input

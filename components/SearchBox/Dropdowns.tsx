@@ -1,6 +1,4 @@
-import DropDown from "./DropDown";
-import DropDown3 from "./Dropdown3";
-import { DropDownShad } from "./DropDownShad";
+import DropDownShad from "./DropDownShad";
 
 type Props = {
     lists: {
@@ -15,29 +13,7 @@ const Dropdowns = ({ lists }: Props) => {
         <div className="flex flex-col">
             <div className="gap-2 flex p-2">
                 {lists.map((list) => (
-                    <DropDown
-                        key={list.current}
-                        items={list.list}
-                        selectedItem={list.current}
-                        onSelect={list.setCurrent}
-                    />
-                ))}
-            </div>
-            {/* <div className="gap-2 flex p-2">
-                {lists.map((list) => (
-                    <DropDown
-                        key={list.current}
-                        items={list.list}
-                        selectedItem={list.current}
-                        onSelect={list.setCurrent}
-                    />
-                ))}
-            </div> */}
-            <DropDownShad />
-
-            <div className="gap-2 flex p-2">
-                {lists.map((list) => (
-                    <DropDown3
+                    <DropDownShad
                         key={list.current}
                         items={list.list}
                         selectedItem={list.current}
