@@ -11,8 +11,9 @@ async function JobCard(card: JobPostWithCompanies) {
     ].filter(
         (item) => Boolean(item) && (!Array.isArray(item) || item.length > 0)
     );
-    const url = await getPublicUrl(card.companies.company_logo_url ?? "");
-
+    const url = card?.companies?.company_logo_url
+        ? await getPublicUrl(card.companies.company_logo_url)
+        : "";
     console.log(card);
 
     return (
@@ -21,20 +22,20 @@ async function JobCard(card: JobPostWithCompanies) {
             id=""
             href={`/job/${card.id}`}
         >
-            {card.companies.company_logo_url ? (
+            {url ? (
                 <Image src={url} alt="" width="64" height="64" />
             ) : (
                 <div className="w-16 h-16 justify-center items-center flex ">
                     <p className="text-4xl">
-                        {card.companies.company_name
-                            ? card.companies.company_name[0].toUpperCase()
+                        {card?.companies?.company_name
+                            ? card?.companies?.company_name[0].toUpperCase()
                             : "J"}
                     </p>
                 </div>
             )}
             <div className="flex flex-col grow">
                 <div className="text-xl font-bold ">{card.job_title}</div>
-                <div className="text-lg">{card.companies.company_name}</div>
+                <div className="text-lg">{card?.companies?.company_name}</div>
                 <div className="flex w-full gap-2">
                     {boxes.map((box, index) => (
                         <div

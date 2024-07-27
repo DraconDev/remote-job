@@ -222,7 +222,7 @@ export const experiences = [
 ];
 
 export const jobTypes = [
-    "Any type",
+    "All job types",
     "Full Time",
     "Part Time",
     "Contractor",

@@ -1,4 +1,6 @@
-import ListBoxCustom from "./Dropdown2";
+import DropDown from "./DropDown";
+import DropDown3 from "./Dropdown3";
+import { DropDownShad } from "./DropDownShad";
 
 type Props = {
     lists: {
@@ -10,15 +12,39 @@ type Props = {
 
 const Dropdowns = ({ lists }: Props) => {
     return (
-        <div className="gap-2 flex p-2">
-            {lists.map((list) => (
-                <ListBoxCustom
-                    key={list.current}
-                    items={list.list}
-                    selectedItem={list.current}
-                    onSelect={list.setCurrent}
-                />
-            ))}
+        <div className="flex flex-col">
+            <div className="gap-2 flex p-2">
+                {lists.map((list) => (
+                    <DropDown
+                        key={list.current}
+                        items={list.list}
+                        selectedItem={list.current}
+                        onSelect={list.setCurrent}
+                    />
+                ))}
+            </div>
+            {/* <div className="gap-2 flex p-2">
+                {lists.map((list) => (
+                    <DropDown
+                        key={list.current}
+                        items={list.list}
+                        selectedItem={list.current}
+                        onSelect={list.setCurrent}
+                    />
+                ))}
+            </div> */}
+            <DropDownShad />
+
+            <div className="gap-2 flex p-2">
+                {lists.map((list) => (
+                    <DropDown3
+                        key={list.current}
+                        items={list.list}
+                        selectedItem={list.current}
+                        onSelect={list.setCurrent}
+                    />
+                ))}
+            </div>
         </div>
     );
 };
