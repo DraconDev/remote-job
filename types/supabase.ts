@@ -36,37 +36,36 @@ export type Database = {
     Tables: {
       companies: {
         Row: {
-          billing_email: string | null
-          description: string | null
-          email: string
+          company_billing_email: string | null
+          company_description: string | null
+          company_email: string
+          company_logo_url: string | null
+          company_name: string
+          company_website: string | null
           id: number
-          logo_url: string | null
-          name: string
-          website: string | null
         }
         Insert: {
-          billing_email?: string | null
-          description?: string | null
-          email: string
+          company_billing_email?: string | null
+          company_description?: string | null
+          company_email: string
+          company_logo_url?: string | null
+          company_name: string
+          company_website?: string | null
           id?: number
-          logo_url?: string | null
-          name: string
-          website?: string | null
         }
         Update: {
-          billing_email?: string | null
-          description?: string | null
-          email?: string
+          company_billing_email?: string | null
+          company_description?: string | null
+          company_email?: string
+          company_logo_url?: string | null
+          company_name?: string
+          company_website?: string | null
           id?: number
-          logo_url?: string | null
-          name?: string
-          website?: string | null
         }
         Relationships: []
       }
       job_post: {
         Row: {
-          apply_link: string
           company_id: number | null
           created_at: string
           description: string | null
@@ -78,7 +77,6 @@ export type Database = {
           tags: string[] | null
         }
         Insert: {
-          apply_link: string
           company_id?: number | null
           created_at?: string
           description?: string | null
@@ -90,7 +88,6 @@ export type Database = {
           tags?: string[] | null
         }
         Update: {
-          apply_link?: string
           company_id?: number | null
           created_at?: string
           description?: string | null

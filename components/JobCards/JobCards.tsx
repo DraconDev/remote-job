@@ -1,8 +1,8 @@
-import { Database } from "@/types/supabase";
 import JobCard from "./JobCard";
+import { JobPostWithCompanies } from "@/types/custom";
 
 type Props = {
-    data: Database["public"]["Tables"]["job_post"]["Row"][] | null;
+    data: JobPostWithCompanies[] | undefined;
 };
 
 const JobCards = (props: Props) => {
@@ -10,11 +10,9 @@ const JobCards = (props: Props) => {
         <div className="flex flex-col gap-4">
             {/* {props.data && JSON.stringify(props.data)} */}
             {props.data ? (
-                props.data.map(
-                    (job: Database["public"]["Tables"]["job_post"]["Row"]) => (
-                        <JobCard key={job.id} {...job} />
-                    )
-                )
+                props.data.map((job: JobPostWithCompanies) => (
+                    <JobCard key={job.id} {...job} />
+                ))
             ) : (
                 <p>Loading jobs...</p>
             )}
