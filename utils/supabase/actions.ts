@@ -19,19 +19,33 @@ export async function createJobPost(formData: FormData) {
         formData.get("tag5")?.toString() ?? "",
     ].filter((tag) => tag !== "");
 
-    const logo_url = await uploadLogo(formData.get("logo") as File);
+    const company_id = await createCompany(formData);
 
-    const job_post = {
-        job_title: formData.get("job_title") as string,
-        description: formData.get("description") as string,
-        company_name: formData.get("company_name") as string,
-        apply_link: formData.get("apply_link") as string,
-        location: formData.get("location") as string,
-        salary_min: formData.get("salary_min") as string,
-        salary_max: formData.get("salary_max") as string,
-        tags: tags,
-        logo_path: logo_url,
-    };
+    const job_post: Partial<
+        Database["public"]["Tables"]["job_post"]["Insert"]
+    > = {};
+    if (formData.get("job_title"))
+        job_post.job_title = formData.get("job_title") as string;
+    if (formData.get("description"))
+        job_post.description = formData.get("description") as string;
+    if (formData.get("location"))
+        job_post.location = formData.get("location") as string;
+    if (formData.get("salary_min")) {
+        const salaryMin = formData.get("salary_min");
+        if (salaryMin !== null) {
+            job_post.salary_min = Number(salaryMin);
+        }
+    }
+    if (formData.get("salary_max")) {
+        const salaryMax = formData.get("salary_max");
+        if (salaryMax !== null) {
+            job_post.salary_max = Number(salaryMax);
+        }
+    }
+    if (tags.length > 0) job_post.tags = tags;
+
+    job_post.company_id = company_id;
+
     const { data, error } = await supabase.from("job_post").insert(job_post);
 
     if (error) {
@@ -42,6 +56,36 @@ export async function createJobPost(formData: FormData) {
     revalidatePath("/");
 
     return data;
+}
+
+// add company info
+export async function createCompany(formData: FormData) {
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+
+    const logo_url = await uploadLogo(formData.get("logo") as File);
+
+    const company = {
+        company_name: (formData.get("company_name") as string) ?? undefined,
+        company_email: (formData.get("company_email") as string) ?? undefined,
+        company_website:
+            (formData.get("company_website") as string) ?? undefined,
+        company_description:
+            (formData.get("company_description") as string) ?? undefined,
+        company_billing_email:
+            (formData.get("company_billing_email") as string) ?? undefined,
+        company_logo_url: logo_url,
+    };
+
+    const { data, error } = await supabase
+        .from("companies")
+        .insert(company)
+        .select("id");
+    if (error) {
+        console.log(error);
+        return error;
+    }
+    return data[0].id;
 }
 
 export async function getJobs() {

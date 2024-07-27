@@ -9,31 +9,31 @@ type Props = {
 
 const FormCompanySection = ({ setSelectedFile }: Props) => {
     const [company, setCompany] = useState({
-        name: {
+        company_name: {
             value: "",
             type: "text",
             placeholder: "Name",
             required: true,
         },
-        email: {
+        company_email: {
             value: "",
             type: "text",
             placeholder: "Email",
             required: true,
         },
-        website: {
+        company_website: {
             value: "",
             type: "text",
             placeholder: "Website",
             required: false,
         },
-        description: {
+        company_description: {
             value: "",
             type: "text",
             placeholder: "Description",
             required: false,
         },
-        billing_email: {
+        company_billing_email: {
             value: "",
             type: "text",
             placeholder: "Billing Email",
