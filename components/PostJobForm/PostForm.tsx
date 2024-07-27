@@ -5,8 +5,8 @@ import Description from "@/components/Quill/Description";
 import FormElem from "./FormElem";
 import PostJobSection from "./PostJobSection";
 import { Button } from "../ui/button";
-import MyDropZone from "../Dropzone/Dropzone";
 import { createJobPost } from "@/utils/supabase/actions";
+import FormCompanySection from "./FormCompanySection";
 
 type Props = {};
 
@@ -167,9 +167,8 @@ const PostForm = (props: Props) => {
             </PostJobSection>
             <PostJobSection title="Description" />
             <Description />
-            <FormCompanySection />
+            <FormCompanySection setSelectedFile={setSelectedFile} />
 
-            <MyDropZone setSelectedFile={setSelectedFile} />
             <div className="flex justify-end">
                 <Button
                     type="submit"

@@ -20,7 +20,7 @@ const FormElem = (props: Props) => {
                 value={props.value}
                 onChange={props.onChange}
                 className={"p-1"}
-                minLength={3}
+                minLength={5}
             />
             {props.required && props.value.length < 5 && (
                 <p className="text-sm text-red-500 p-1">Minimum 5 characters</p>
