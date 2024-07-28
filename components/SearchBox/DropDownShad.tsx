@@ -19,7 +19,7 @@ export default function DropDownShad({
     onSet,
 }: DropDownProps) {
     const handleChange = (newValue: string) => {
-          console.log("newValue", newValue);
+        console.log("newValue", newValue);
         onSet(newValue);
     };
     return (

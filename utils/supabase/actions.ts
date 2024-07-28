@@ -147,8 +147,7 @@ export async function searchJobs(search: searchType) {
     let query = supabase
         .from("job_post")
         .select()
-        .ilike("job_title", `%${search.searchField}%`)
-        .order("created_at", { ascending: false });
+        .ilike("job_title", `%${search.searchField}%`);
 
     console.log(search);
 
@@ -164,6 +163,8 @@ export async function searchJobs(search: searchType) {
     if (search.salary) {
         query = query.gte("salary_min", search.salary);
     }
+
+    query = query.order("created_at", { ascending: false });
 
     const { data: jobPost, error } = await query;
 
