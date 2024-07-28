@@ -5,7 +5,7 @@ import { Database } from "@/types/supabase";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
-
+import { searchType } from "@/types/custom";
 export async function createJobPost(formData: FormData) {
     console.log(formData);
     const cookieStore = cookies();
@@ -141,13 +141,38 @@ export async function getJobById(id: string) {
     return jobPost as Database["public"]["Tables"]["job_post"]["Row"];
 }
 
-export async function searchJobs(searchField: string, location: string, jobType: string, experience: string, salary: number) {
+export async function searchJobs(search: searchType) {
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
-    const { data: jobPost } = await supabase
+    let query = supabase
         .from("job_post")
         .select()
-        .ilike("job_title", `%${searchField}%`);
+        .ilike("job_title", `%${search.searchField}%`)
+        .order("created_at", { ascending: false });
+
+    console.log(search);
+
+    if (search.location) {
+        query = query.ilike("location", `%${search.location}%`);
+    }
+    if (search.jobType) {
+        query = query.ilike("job_type", `%${search.jobType}%`);
+    }
+    if (search.experience) {
+        query = query.ilike("experience", `%${search.experience}%`);
+    }
+    if (search.salary) {
+        query = query.gte("salary_min", search.salary);
+    }
+
+    const { data: jobPost, error } = await query;
+
+    if (error) {
+        console.error("Error fetching job posts:", error);
+        return [];
+    }
+
+    console.log(jobPost);
     return jobPost;
 }
 

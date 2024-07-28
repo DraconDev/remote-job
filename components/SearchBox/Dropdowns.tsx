@@ -20,7 +20,7 @@ const Dropdowns = ({ lists, salary, setSalary }: Props) => {
                         key={list.current}
                         items={list.list}
                         selectedItem={list.current}
-                        onSelect={list.setCurrent}
+                        onSet={list.setCurrent}
                     />
                 ))}
                 {/* <SelectMultiple
