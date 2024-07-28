@@ -13,7 +13,7 @@ const NavMenu = (props: Props) => {
             <div className="container justify-between flex px-3 ">
                 <Link
                     href="/"
-                    className="text-white text-2xl p-2 font-bold rounded-md"
+                    className="text-primary-foreground text-2xl p-2 font-bold rounded-md"
                 >
                     RWN
                 </Link>
