@@ -7,6 +7,8 @@ import PostJobSection from "./PostJobSection";
 import { Button } from "../ui/button";
 import { createJobPost } from "@/utils/supabase/actions";
 import FormCompanySection from "./FormCompanySection";
+import PostJobDropDowns from "./PostJobDropDowns";
+import CountriesDropAndMultiSelect from "./CountriesDropAndMultiSelect";
 
 type Props = {};
 
@@ -110,6 +112,8 @@ const PostForm = (props: Props) => {
         await createJobPost(formData);
     };
 
+    const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
+
     return (
         <form
             onSubmit={handleSubmit}
@@ -168,7 +172,13 @@ const PostForm = (props: Props) => {
                     />
                 ))}
             </PostJobSection>
+            <CountriesDropAndMultiSelect
+                selected={selectedCountries}
+                setSelected={setSelectedCountries}
+            />
+            <PostJobDropDowns />
             <PostJobSection title="Description" />
+
             <Description />
             <FormCompanySection setSelectedFile={setSelectedFile} />
 

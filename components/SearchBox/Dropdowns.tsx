@@ -21,6 +21,7 @@ const Dropdowns = ({ lists, salary, setSalary }: Props) => {
                         items={list.list}
                         selectedItem={list.current}
                         onSet={list.setCurrent}
+                        
                     />
                 ))}
                 {/* <SelectMultiple

@@ -1,5 +1,7 @@
 "use client";
 
+import CountriesDropAndMultiSelect from "@/components/PostJobForm/CountriesDropAndMultiSelect";
+import MultiSelect from "@/components/ui/MultiSelect";
 import { useState } from "react";
 
 type Props = {};
@@ -11,6 +13,8 @@ const Page = (props: Props) => {
         <div>
             {/* <button onClick={() => sendEmail()}>Send Email</button> */}
             {/* <Example /> */}
+            <CountriesDropAndMultiSelect />
+            <MultiSelect />
         </div>
     );
 };
