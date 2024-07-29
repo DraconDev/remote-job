@@ -9,6 +9,7 @@ import { createJobPost } from "@/utils/supabase/actions";
 import FormCompanySection from "./FormCompanySection";
 import PostJobDropDowns from "./PostJobDropDowns";
 import CountriesDropAndMultiSelect from "./CountriesDropAndMultiSelect";
+import { experiences, jobTypes } from "@/consts/info";
 
 type Props = {};
 
@@ -31,12 +32,12 @@ const schema = z.object({
         placeholder: z.string().default("Application Link or Email"),
         required: z.boolean().default(true),
     }),
-    location: z.object({
-        value: z.string().min(3, "Minimum 3 characters").optional(),
-        type: z.string().default("text"),
-        placeholder: z.string().default("Location"),
-        required: z.boolean().default(true),
-    }),
+    // location: z.object({
+    //     value: z.string().min(3, "Minimum 3 characters").optional(),
+    //     type: z.string().default("text"),
+    //     placeholder: z.string().default("Location"),
+    //     required: z.boolean().default(true),
+    // }),
     salary_min: z.object({
         value: z.string().min(0, "Minimum 3 characters").optional(),
         type: z.string().default("number"),
@@ -73,12 +74,12 @@ const PostForm = (props: Props) => {
             placeholder: "Application Link or Email",
             required: true,
         },
-        location: {
-            value: "",
-            type: "text",
-            placeholder: "Location",
-            required: true,
-        },
+        // location: {
+        //     value: "",
+        //     type: "text",
+        //     placeholder: "Location",
+        //     required: true,
+        // },
         salary_min: {
             value: "",
             type: "number",
@@ -109,10 +110,35 @@ const PostForm = (props: Props) => {
         if (selectedFile) {
             formData.append("logo", selectedFile);
         }
+        if (selectedCountries.length > 0) {
+            formData.append("countries", JSON.stringify(selectedCountries));
+        }
+        formData.append("experience", experience);
+        formData.append("job_type", jobType);
         await createJobPost(formData);
     };
 
     const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
+
+    const [experience, setExperience] = useState(experiences[4]);
+    const [jobType, setJobType] = useState(jobTypes[1]);
+
+    const menus = [
+        {
+            name: "experiences",
+            value: experiences.slice(1),
+            select: experience,
+            setSelect: setExperience,
+            title: "Experience",
+        },
+        {
+            name: "jobTypes",
+            value: jobTypes.slice(1),
+            select: jobType,
+            setSelect: setJobType,
+            title: "Job type",
+        },
+    ];
 
     return (
         <form
@@ -172,11 +198,12 @@ const PostForm = (props: Props) => {
                     />
                 ))}
             </PostJobSection>
+            <PostJobSection title="Location" />
             <CountriesDropAndMultiSelect
                 selected={selectedCountries}
                 setSelected={setSelectedCountries}
             />
-            <PostJobDropDowns />
+            <PostJobDropDowns menus={menus} />
             <PostJobSection title="Description" />
 
             <Description />

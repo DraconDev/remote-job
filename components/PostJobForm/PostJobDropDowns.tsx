@@ -1,4 +1,3 @@
-import { experiences, jobTypes } from "@/consts/info";
 import {
     Select,
     SelectContent,
@@ -7,37 +6,42 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import PostJobSection from "./PostJobSection";
 
-type Props = {};
+type Props = {
+    menus: {
+        name: string;
+        value: string[];
+        select: string;
+        setSelect: (value: string) => void;
+        title: string;
+    }[];
+};
 
-const PostJobDropDowns = (props: Props) => {
-    const menus = [
-        {
-            name: "experiences",
-            value: experiences.slice(1),
-        },
-        {
-            name: "jobTypes",
-            value: jobTypes.slice(1),
-        },
-    ];
+const PostJobDropDowns = ({ menus }: Props) => {
     return (
         <div>
             {menus.map((menu) => (
-                <Select key={menu.name}>
-                    <SelectTrigger className="w-[180px] p-4">
-                        <SelectValue placeholder={menu.name} />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectGroup>
-                            {menu.value.map((item) => (
-                                <SelectItem key={item} value={item}>
-                                    {item}
-                                </SelectItem>
-                            ))}
-                        </SelectGroup>
-                    </SelectContent>
-                </Select>
+                <PostJobSection key={menu.name} title={menu.title}>
+                    <Select
+                        key={menu.name}
+                        onValueChange={menu.setSelect}
+                        value={menu.select}
+                    >
+                        <SelectTrigger className="w-[180px] p-4">
+                            <SelectValue placeholder={menu.select} />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectGroup>
+                                {menu.value.map((item) => (
+                                    <SelectItem key={item} value={item}>
+                                        {item}
+                                    </SelectItem>
+                                ))}
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
+                </PostJobSection>
             ))}
         </div>
     );
