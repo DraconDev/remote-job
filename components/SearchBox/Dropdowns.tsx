@@ -1,4 +1,4 @@
-import Input from "../ui/input";
+import { Input } from "../ui/input";
 import DropDownShad from "./DropDownShad";
 
 type Props = {
@@ -21,7 +21,6 @@ const Dropdowns = ({ lists, salary, setSalary }: Props) => {
                         items={list.list}
                         selectedItem={list.current}
                         onSet={list.setCurrent}
-                        
                     />
                 ))}
                 {/* <SelectMultiple

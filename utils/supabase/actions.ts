@@ -177,6 +177,23 @@ export async function searchJobs(search: searchType) {
     return jobPost;
 }
 
+// save email address to db
+export async function saveEmail(formdata: FormData) {
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+
+    const email = formdata.get("email") as string;
+    const { data, error } = await supabase
+        .from("subscribers")
+        .insert({ email: email })
+        .select();
+    if (error) {
+        console.log(error);
+        return error;
+    }
+    return data;
+}
+
 // export async function createInvoice(formData: FormData) {
 //     "use server";
 
