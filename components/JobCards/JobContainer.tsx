@@ -1,5 +1,4 @@
 import JobCards from "./JobCards";
-import { Database } from "@/types/supabase";
 import { JobPostWithCompanies } from "@/types/custom";
 
 type Props = {
