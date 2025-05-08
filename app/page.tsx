@@ -1,6 +1,3 @@
-import JobContainer from "@/components/JobCards/JobContainer";
-import SearchBox from "@/components/SearchBox/SearchBox";
-
 "use client";
 import JobContainer from "@/components/JobCards/JobContainer";
 import SearchBox from "@/components/SearchBox/SearchBox";
