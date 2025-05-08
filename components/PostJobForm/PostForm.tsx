@@ -209,11 +209,11 @@ const PostForm = (props: Props) => {
             <Description />
             <FormCompanySection setSelectedFile={setSelectedFile} />
 
-            <div className="flex justify-end">
+            <div className="flex justify-end mt-6">
                 <Button
                     type="submit"
                     variant="default"
-                    className="max-w-[300px] align"
+                    className="max-w-[300px]"
                 >
                     Submit
                 </Button>
