@@ -6,9 +6,11 @@ import { InputWithButton } from "./InputWithButton";
 import { searchJobs } from "@/utils/supabase/actions";
 import { searchType } from "@/types/custom";
 
-type Props = {};
+type Props = {
+    onSearchResults: (results: any[] | null) => void;
+};
 
-const SearchBox = (props: Props) => {
+const SearchBox = ({ onSearchResults }: Props) => {
     const [searchField, setSearchField] = useState("");
     const [location, setLocation] = useState(countries[0]);
     const [jobType, setJobType] = useState(jobTypes[0]);
@@ -33,32 +35,31 @@ const SearchBox = (props: Props) => {
         },
     ];
 
-    const handleSearch = () => {};
+    const handleSearch = async () => {
+        if (searchField.length < 3) {
+            return;
+        }
+        const search: searchType = {
+            searchField,
+        };
+        if (location != countries[0]) {
+            search.location = location;
+        }
+        if (jobType != jobTypes[0]) {
+            search.jobType = jobType;
+        }
+        if (experience != experiences[0]) {
+            search.experience = experience;
+        }
+        if (salary > 0) {
+            search.salary = salary;
+        }
+        const results = await searchJobs(search);
+        onSearchResults(results);
+    };
 
     return (
-        <form
-            action={() => {
-                if (searchField.length < 3) {
-                    return;
-                }
-                const search: searchType = {
-                    searchField,
-                };
-                if (location != countries[0]) {
-                    search.location = location;
-                }
-                if (jobType != jobTypes[0]) {
-                    search.jobType = jobType;
-                }
-                if (experience != experiences[0]) {
-                    search.experience = experience;
-                }
-                if (salary > 0) {
-                    search.salary = salary;
-                }
-                searchJobs(search);
-            }}
-        >
+        <form action={handleSearch}>
             <div className="w-full p-2 bg-card border rounded-lg gap-2">
                 <h1>Remote Jobs</h1>
                 <div className="w-full">
