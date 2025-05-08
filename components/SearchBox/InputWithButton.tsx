@@ -19,7 +19,7 @@ export function InputWithButton({
                 value={searchField}
                 onChange={(e) => setSearchField(e.target.value)}
             />
-            <Button type="submit">Subscribe</Button>
+            <Button type="submit">Search</Button>
         </div>
     );
 }
