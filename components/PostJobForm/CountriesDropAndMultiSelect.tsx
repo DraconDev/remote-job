@@ -37,7 +37,7 @@ const CountriesDropAndMultiSelect = ({ selected, setSelected }: Props) => {
                 {selected.map((item) => (
                     <button
                         key={item}
-                        className="p-2 bg-destructive rounded-full w-[300px] text-destructive-foreground h-10 text-sm"
+                        className="px-3 py-1 bg-destructive rounded-full text-destructive-foreground text-sm flex items-center gap-1"
                         onClick={() =>
                             setSelected(selected.filter((i) => i !== item))
                         }
