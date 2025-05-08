@@ -1,6 +1,3 @@
-import { getJobs } from "@/utils/supabase/actions";
-import JobCards from "./JobCards";
-
 import JobCards from "./JobCards";
 
 type Props = {
