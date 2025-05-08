@@ -59,7 +59,7 @@ const SearchBox = ({ onSearchResults }: Props) => {
     };
 
     return (
-        <form action={handleSearch}>
+        <form onSubmit={handleSearch}>
             <div className="w-full p-2 bg-card border rounded-lg gap-2">
                 <h1>Remote Jobs</h1>
                 <div className="w-full">
