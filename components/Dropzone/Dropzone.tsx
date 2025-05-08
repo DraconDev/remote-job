@@ -55,8 +55,8 @@ function MyDropZone({
                         src={selectedImage}
                         alt="Selected"
                         className="w-full h-full object-cover rounded-lg"
-                        width="100"
-                        height="100"
+                        width={150}
+                        height={150}
                     />
                 ) : (
                     <div className="flex flex-col items-center justify-center w-full h-full text-gray-500">
