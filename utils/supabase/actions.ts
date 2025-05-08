@@ -146,7 +146,10 @@ export async function searchJobs(search: searchType) {
     const supabase = createClient(cookieStore);
     let query = supabase
         .from("job_post")
-        .select()
+        .select(
+            `*
+            ,companies: company_id(*)`
+        )
         .ilike("job_title", `%${search.searchField}%`);
 
     console.log(search);
@@ -174,7 +177,7 @@ export async function searchJobs(search: searchType) {
     }
 
     console.log(jobPost);
-    return jobPost;
+    return jobPost as any; // TODO: Define a proper return type for searchJobs
 }
 
 // save email address to db
