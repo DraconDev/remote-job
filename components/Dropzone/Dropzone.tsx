@@ -61,7 +61,7 @@ function MyDropZone({
                 ) : (
                     <div className="flex flex-col items-center justify-center w-full h-full text-gray-500">
                         <MdUpload className="w-8 h-8 mb-2" />
-                        <p className="text-sm text-center">Drag 'n' drop or click to upload</p>
+                        <p className="text-sm text-center">Drag &apos;n&apos; drop or click to upload</p>
                     </div>
                 )}
             </div>
