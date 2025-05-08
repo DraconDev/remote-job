@@ -1,7 +1,8 @@
 import JobCards from "./JobCards";
+import { Database } from "@/types/supabase";
 
 type Props = {
-    data: any[] | null;
+    data: Database["public"]["Tables"]["job_post"]["Row"][] | null;
 };
 
 const JobContainer = ({ data }: Props) => {
