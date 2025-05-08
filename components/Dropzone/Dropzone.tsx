@@ -1,4 +1,4 @@
-"use client";
+that "use client";
 import { MdUpload } from "react-icons/md";
 
 import { useCallback, useState } from "react";
