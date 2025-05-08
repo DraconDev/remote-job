@@ -43,7 +43,7 @@ function MyDropZone({
     });
     return (
         <>
-            <div className="">64x64px large avatar in png or jpeg format</div>
+            <div className="text-center text-sm text-gray-600 mb-2">Upload your company logo (max 64x64px, PNG or JPEG)</div>
 
             <div
                 {...getRootProps()}
