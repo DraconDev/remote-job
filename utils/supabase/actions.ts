@@ -89,9 +89,10 @@ export async function createCompany(formData: FormData) {
 }
 
 export async function getJobs(companyId?: string) {
+    console.log("Fetching all jobs...");
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
-    const { data: jobPost } = await supabase
+    const { data: jobPost, error } = await supabase
         .from("job_post")
         .select(
             `*
@@ -99,6 +100,12 @@ export async function getJobs(companyId?: string) {
         )
         .order("created_at", { ascending: false });
 
+    if (error) {
+        console.error("Error fetching all job posts:", error);
+        return null;
+    }
+
+    console.log("Successfully fetched all jobs:", jobPost);
     return jobPost;
 }
 
@@ -142,6 +149,7 @@ export async function getJobById(id: string) {
 }
 
 export async function searchJobs(search: searchType) {
+    console.log("Searching jobs with parameters:", search);
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
     let query = supabase
@@ -151,8 +159,6 @@ export async function searchJobs(search: searchType) {
             ,companies: company_id(*)`
         )
         .ilike("job_title", `%${search.searchField}%`);
-
-    console.log(search);
 
     if (search.location) {
         query = query.ilike("location", `%${search.location}%`);
@@ -173,10 +179,10 @@ export async function searchJobs(search: searchType) {
 
     if (error) {
         console.error("Error fetching job posts:", error);
-        return [];
+        return null;
     }
 
-    console.log(jobPost);
+    console.log("Successfully fetched job posts:", jobPost);
     return jobPost as any; // TODO: Define a proper return type for searchJobs
 }
 
