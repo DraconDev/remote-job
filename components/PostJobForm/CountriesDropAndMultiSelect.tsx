@@ -43,7 +43,7 @@ const CountriesDropAndMultiSelect = ({ selected, setSelected }: Props) => {
                         }
                     >
                         <div className="flex gap-1 items-center justify-center">
-                            {item} <MdCancel className="w-6 h-6" />{" "}
+                            {item} <MdCancel className="w-4 h-4" />
                         </div>
                     </button>
                 ))}
