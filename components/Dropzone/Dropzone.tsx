@@ -54,13 +54,14 @@ function MyDropZone({
                     <Image
                         src={selectedImage}
                         alt="Selected"
-                        className="w-full h-full object-cover rounded-full"
-                        width="64"
-                        height="64"
+                        className="w-full h-full object-cover rounded-lg"
+                        width="100"
+                        height="100"
                     />
                 ) : (
-                    <div className="justify-center items-center flex w-full h-full ">
-                        <MdUpload className="w-12 h-12" />
+                    <div className="flex flex-col items-center justify-center w-full h-full text-gray-500">
+                        <MdUpload className="w-8 h-8 mb-2" />
+                        <p className="text-sm text-center">Drag 'n' drop or click to upload</p>
                     </div>
                 )}
             </div>
