@@ -18,9 +18,6 @@ const NavMenu = (props: Props) => {
                     RWN
                 </Link>
                 <div className=" flex gap-3 items-center">
-                    <Link href="/" className={linkStyle}>
-                        <FaSearch className="w-6 h-6" />
-                    </Link>
                     <CustomLink href="/postjob" add="bg-accent">
                         Post a job
                     </CustomLink>
