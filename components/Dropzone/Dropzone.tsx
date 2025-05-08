@@ -47,7 +47,7 @@ function MyDropZone({
 
             <div
                 {...getRootProps()}
-                className="border-2 border-black w-[64px] h-[64px]  hover:cursor-pointer  rounded-full"
+                className="border-2 border-dashed border-gray-400 w-[100px] h-[100px] flex items-center justify-center hover:cursor-pointer rounded-lg p-4"
             >
                 <input {...getInputProps()} type="file" accept="image/*" />
                 {selectedImage ? (
