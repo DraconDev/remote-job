@@ -6,11 +6,20 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [jobListings, setJobListings] = useState<any[] | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchJobs = async () => {
-      const initialJobs = await getJobs();
-      setJobListings(initialJobs);
+      try {
+        const initialJobs = await getJobs();
+        setJobListings(initialJobs);
+      } catch (err) {
+        console.error("Error fetching initial jobs:", err);
+        setError("Failed to load job listings.");
+      } finally {
+        setLoading(false);
+      }
     };
     fetchJobs();
   }, []);
@@ -22,7 +31,9 @@ export default function Home() {
   return (
     <main className="flex flex-col w-full gap-3 p-4">
       <SearchBox onSearchResults={handleSearchResults} />
-      <JobContainer data={jobListings} />
+      {loading && <p>Loading jobs...</p>}
+      {error && <p className="text-red-500">{error}</p>}
+      {!loading && !error && <JobContainer data={jobListings} />}
     </main>
   );
 }
