@@ -43,7 +43,7 @@ function MyDropZone({
   });
   return (
     <div className="flex items-center justify-between w-full h-full p-2">
-      <div className="text-center text-sm text-gray-600 mb-2">
+      <div className="text-center text-sm text-gray-600 mb-2 p-4">
         Upload your company logo (max 64x64px, PNG or JPEG)
       </div>
 
