@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 type InputWithButtonProps = {
     searchField: string;
     setSearchField: (value: string) => void;
-    handleSearch: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    handleSearch: () => void;
 };
 
 export function InputWithButton({
