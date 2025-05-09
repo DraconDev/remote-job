@@ -35,9 +35,7 @@ const SearchBox = ({ onSearchResults }: Props) => {
         },
     ];
 
-    const handleSearch = (event: React.FormEvent) => {
-        event.preventDefault();
-
+    const handleSearch = () => {
         const performSearch = async () => {
             if (searchField.length < 3) {
                 return;
@@ -64,14 +62,21 @@ const SearchBox = ({ onSearchResults }: Props) => {
         performSearch();
     };
 
+    // Form submission can still call handleSearch, but event.preventDefault() is needed
+    const onFormSubmit = (event: React.FormEvent) => {
+        event.preventDefault();
+        handleSearch();
+    };
+
     return (
-        <form onSubmit={handleSearch}>
+        <form onSubmit={onFormSubmit}>
             <div className="w-full p-2 bg-card border rounded-lg gap-2">
                 <h1>Remote Jobs</h1>
                 <div className="w-full">
                     <InputWithButton
                         searchField={searchField}
                         setSearchField={setSearchField}
+                        handleSearch={handleSearch} // Pass the original handleSearch for the button click
                     />
                     <Dropdowns
                         lists={menus}
