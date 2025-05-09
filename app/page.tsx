@@ -32,7 +32,7 @@ export default function Home() {
   console.log("Job listings state updated:", jobListings);
   return (
     <main className="flex flex-col w-full gap-3 p-4">
-      {/* <SearchBox onSearchResults={handleSearchResults} /> */}
+      <SearchBox onSearchResults={handleSearchResults} />
       {loading && <p>Loading jobs...</p>}
       {error && <p className="text-red-500">{error}</p>}
       {/* {!loading && !error && <JobContainer data={jobListings} />} */}
