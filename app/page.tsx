@@ -1,6 +1,6 @@
 "use client";
 import JobContainer from "@/components/JobCards/JobContainer";
-// import SearchBox from "@/components/SearchBox/SearchBox"; // Temporarily remove SearchBox
+import SearchBox from "@/components/SearchBox/SearchBox";
 import { getJobs } from "@/utils/supabase/actions";
 import { useEffect, useState } from "react";
 
@@ -26,16 +26,16 @@ export default function Home() {
     fetchJobs();
   }, []);
 
-  // Temporarily remove handleSearchResults
-  // const handleSearchResults = (results: any[] | null) => {
-  //   setJobListings(results);
-  // };
+  const handleSearchResults = (results: any[] | null) => {
+    console.log("Search results received:", results);
+    setJobListings(results);
+  };
 
   console.log("Job listings state in Home component:", jobListings);
 
   return (
     <main className="flex flex-col w-full gap-3 p-4">
-      {/* <SearchBox onSearchResults={handleSearchResults} /> */}
+      <SearchBox onSearchResults={handleSearchResults} />
       {loading && <p>Loading jobs...</p>}
       {error && <p className="text-red-500">{error}</p>}
       {!loading && !error && (
