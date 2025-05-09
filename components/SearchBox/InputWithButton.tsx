@@ -4,11 +4,13 @@ import { Input } from "@/components/ui/input";
 type InputWithButtonProps = {
     searchField: string;
     setSearchField: (value: string) => void;
+    handleSearch: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export function InputWithButton({
     searchField,
     setSearchField,
+    handleSearch,
 }: InputWithButtonProps) {
     return (
         <div className="flex w-full items-center space-x-2">
@@ -19,7 +21,9 @@ export function InputWithButton({
                 value={searchField}
                 onChange={(e) => setSearchField(e.target.value)}
             />
-            <Button type="submit">Search</Button>
+            <Button type="button" onClick={handleSearch}>
+                Search
+            </Button>
         </div>
     );
 }
