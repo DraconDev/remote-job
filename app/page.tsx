@@ -39,11 +39,7 @@ export default function Home() {
       {!loading && !error && (
         <>
           {jobListings && jobListings.length > 0 && (
-            <div>
-              <h2>Job Listings Loaded</h2>
-              {/* You can add a simple representation of the data here for verification */}
-              {/* <pre>{JSON.stringify(jobListings, null, 2)}</pre> */}
-            </div>
+            <JobContainer data={jobListings} />
           )}
           {(!jobListings || jobListings.length === 0) && (
             <p>No job listings found.</p>
