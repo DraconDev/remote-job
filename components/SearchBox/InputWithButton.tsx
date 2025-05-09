@@ -20,6 +20,11 @@ export function InputWithButton({
                 className="grow"
                 value={searchField}
                 onChange={(e) => setSearchField(e.target.value)}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                        handleSearch();
+                    }
+                }}
             />
             <Button type="button" onClick={handleSearch}>
                 Search
