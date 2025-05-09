@@ -88,11 +88,11 @@ export async function createCompany(formData: FormData) {
     return data[0].id;
 }
 
-export async function getJobs(companyId?: string) {
+export async function getJobs(companyId?: string): Promise<any[] | null> {
     console.log("Fetching all jobs...");
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
-    const { data: jobPost, error } = await supabase
+    const { data: jobPosts, error } = await supabase
         .from("job_post")
         .select(
             `*
@@ -105,15 +105,39 @@ export async function getJobs(companyId?: string) {
         return null;
     }
 
-    console.log("Successfully fetched all jobs:", jobPost);
-    return jobPost;
+    if (!jobPosts) {
+        console.log("No jobs found.");
+        return [];
+    }
+
+    // Fetch public URLs for logos
+    const jobPostsWithUrls = await Promise.all(
+        jobPosts.map(async (job) => {
+            if (job.companies && job.companies.company_logo_url) {
+                const publicUrl = await getPublicUrl(
+                    job.companies.company_logo_url
+                );
+                return {
+                    ...job,
+                    companies: {
+                        ...job.companies,
+                        company_logo_public_url: publicUrl,
+                    },
+                };
+            }
+            return job;
+        })
+    );
+
+    console.log("Successfully fetched all jobs with URLs:", jobPostsWithUrls);
+    return jobPostsWithUrls;
 }
 
 // get public url of image
-export async function getPublicUrl(path: string) {
+export async function getPublicUrl(path: string): Promise<string> {
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
-    const { data } = await supabase.storage
+    const { data } = supabase.storage // Removed await here as getPublicUrl itself is not async
         .from("remoteworknexus")
         .getPublicUrl(path);
     return data.publicUrl;
@@ -148,7 +172,7 @@ export async function getJobById(id: string) {
     return jobPost as Database["public"]["Tables"]["job_post"]["Row"];
 }
 
-export async function searchJobs(search: searchType) {
+export async function searchJobs(search: searchType): Promise<any[] | null> {
     console.log("Searching jobs with parameters:", search);
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
@@ -175,15 +199,39 @@ export async function searchJobs(search: searchType) {
 
     query = query.order("created_at", { ascending: false });
 
-    const { data: jobPost, error } = await query;
+    const { data: jobPosts, error } = await query;
 
     if (error) {
         console.error("Error fetching job posts:", error);
         return null;
     }
 
-    console.log("Successfully fetched job posts:", jobPost);
-    return jobPost as any; // TODO: Define a proper return type for searchJobs
+    if (!jobPosts) {
+        console.log("No jobs found from search.");
+        return [];
+    }
+
+    // Fetch public URLs for logos
+    const jobPostsWithUrls = await Promise.all(
+        jobPosts.map(async (job) => {
+            if (job.companies && job.companies.company_logo_url) {
+                const publicUrl = await getPublicUrl(
+                    job.companies.company_logo_url
+                );
+                return {
+                    ...job,
+                    companies: {
+                        ...job.companies,
+                        company_logo_public_url: publicUrl,
+                    },
+                };
+            }
+            return job;
+        })
+    );
+
+    console.log("Successfully fetched job posts with URLs:", jobPostsWithUrls);
+    return jobPostsWithUrls;
 }
 
 // save email address to db
