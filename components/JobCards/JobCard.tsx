@@ -1,9 +1,8 @@
-import { getPublicUrl } from "@/utils/supabase/actions";
 import Link from "next/link";
 import Image from "next/image";
 import { JobPostWithCompanies } from "@/types/custom";
 
-async function JobCard(card: JobPostWithCompanies) {
+function JobCard(card: JobPostWithCompanies) {
     const boxes = [
         card.location,
         `$${card.salary_min}-$${card.salary_max}`,
@@ -11,9 +10,7 @@ async function JobCard(card: JobPostWithCompanies) {
     ].filter(
         (item) => Boolean(item) && (!Array.isArray(item) || item.length > 0)
     );
-    const url = card?.companies?.company_logo_url
-        ? await getPublicUrl(card.companies.company_logo_url)
-        : "";
+    const url = card.companies?.company_logo_public_url || "";
     console.log(card);
 
     return (
@@ -23,10 +20,10 @@ async function JobCard(card: JobPostWithCompanies) {
             href={`/job/${card.id}`}
         >
             {url ? (
-                <Image src={url} alt="" width="64" height="64" />
+                <Image src={url} alt={card.companies?.company_name || "Company Logo"} width="64" height="64" />
             ) : (
-                <div className="w-16 h-16 justify-center items-center flex ">
-                    <p className="text-4xl">
+                <div className="w-16 h-16 justify-center items-center flex bg-muted rounded">
+                    <p className="text-4xl text-muted-foreground">
                         {card?.companies?.company_name
                             ? card?.companies?.company_name[0].toUpperCase()
                             : "J"}
