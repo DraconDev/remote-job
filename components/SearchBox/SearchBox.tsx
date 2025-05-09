@@ -35,7 +35,8 @@ const SearchBox = ({ onSearchResults }: Props) => {
         },
     ];
 
-    const handleSearch = async () => {
+    const handleSearch = async (event: React.FormEvent) => {
+        event.preventDefault();
         if (searchField.length < 3) {
             return;
         }
