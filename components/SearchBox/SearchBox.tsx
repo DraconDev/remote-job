@@ -35,28 +35,33 @@ const SearchBox = ({ onSearchResults }: Props) => {
         },
     ];
 
-    const handleSearch = async (event: React.FormEvent) => {
+    const handleSearch = (event: React.FormEvent) => {
         event.preventDefault();
-        if (searchField.length < 3) {
-            return;
-        }
-        const search: searchType = {
-            searchField,
+
+        const performSearch = async () => {
+            if (searchField.length < 3) {
+                return;
+            }
+            const search: searchType = {
+                searchField,
+            };
+            if (location != countries[0]) {
+                search.location = location;
+            }
+            if (jobType != jobTypes[0]) {
+                search.jobType = jobType;
+            }
+            if (experience != experiences[0]) {
+                search.experience = experience;
+            }
+            if (salary > 0) {
+                search.salary = salary;
+            }
+            const results = await searchJobs(search);
+            onSearchResults(results);
         };
-        if (location != countries[0]) {
-            search.location = location;
-        }
-        if (jobType != jobTypes[0]) {
-            search.jobType = jobType;
-        }
-        if (experience != experiences[0]) {
-            search.experience = experience;
-        }
-        if (salary > 0) {
-            search.salary = salary;
-        }
-        const results = await searchJobs(search);
-        onSearchResults(results);
+
+        performSearch();
     };
 
     return (
