@@ -37,9 +37,10 @@ const SearchBox = ({ onSearchResults }: Props) => {
 
     const handleSearch = () => {
         const performSearch = async () => {
-            if (searchField.length < 3) {
-                return;
-            }
+            // Allow empty search by removing the length check
+            // if (searchField.length < 3) {
+            //     return;
+            // }
             const search: searchType = {
                 searchField,
             };
