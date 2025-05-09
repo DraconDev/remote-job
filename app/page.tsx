@@ -28,12 +28,23 @@ export default function Home() {
     setJobListings(results);
   };
 
+  console.log("Job listings state updated:", jobListings);
   return (
     <main className="flex flex-col w-full gap-3 p-4">
-      <SearchBox onSearchResults={handleSearchResults} />
+      {/* <SearchBox onSearchResults={handleSearchResults} /> */}
       {loading && <p>Loading jobs...</p>}
       {error && <p className="text-red-500">{error}</p>}
-      {!loading && !error && <JobContainer data={jobListings} />}
+      {/* {!loading && !error && <JobContainer data={jobListings} />} */}
+      {!loading && !error && jobListings && jobListings.length > 0 && (
+        <div>
+          <h2>Job Listings Loaded</h2>
+          {/* You can add a simple representation of the data here for verification */}
+          {/* <pre>{JSON.stringify(jobListings, null, 2)}</pre> */}
+        </div>
+      )}
+       {!loading && !error && (!jobListings || jobListings.length === 0) && (
+        <p>No job listings found.</p>
+      )}
     </main>
   );
 }
