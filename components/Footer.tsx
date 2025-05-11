@@ -10,7 +10,7 @@ import { saveEmail } from "@/utils/supabase/actions";
 
 export default function Component() {
     return (
-        <footer className="bg-muted py-12">
+        <footer className="bg-muted py-16 border-t border-border/40">
             <div className="container grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
                 <div className="space-y-4">
                     <Link
@@ -19,7 +19,7 @@ export default function Component() {
                         prefetch={false}
                     >
                         <MountainIcon className="h-6 w-6" />
-                        <span className="ml-2 font-bold">
+                        <span className="ml-2 text-xl font-semibold">
                             Remote Work Nexus
                         </span>
                     </Link>
@@ -29,7 +29,7 @@ export default function Component() {
                     </p>
                 </div>
                 <div className="space-y-4">
-                    <h3 className="text-lg font-medium">
+                    <h3 className="text-xl font-semibold">
                         Subscribe to our newsletter
                     </h3>
                     <form className="flex gap-2" action={saveEmail}>
@@ -46,7 +46,7 @@ export default function Component() {
                     </p>
                 </div>
                 <div className="space-y-4">
-                    <h3 className="text-lg font-medium">Quick Links</h3>
+                    <h3 className="text-xl font-semibold">Quick Links</h3>
                     <nav className="grid gap-2">
                         {/* <Link
                             href="#"
@@ -77,6 +77,9 @@ export default function Component() {
                         </a>
                     </nav>
                 </div>
+            </div>
+            <div className="container mt-10 text-center text-sm text-muted-foreground">
+                © {new Date().getFullYear()} Remote Work Nexus. All rights reserved.
             </div>
         </footer>
     );
