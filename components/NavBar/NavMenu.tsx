@@ -9,7 +9,7 @@ type Props = {};
 const NavMenu = (props: Props) => {
     const linkStyle = "text-white text-2xl p-2 font-bold rounded-md";
     return (
-        <div className="py-3 bg-primary z-50  flex justify-center">
+        <div className="sticky top-0 z-50 w-full py-3 bg-primary flex justify-center">
             <div className="container justify-between flex px-3 ">
                 <Link
                     href="/"
